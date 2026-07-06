@@ -8,11 +8,10 @@
    3. Navigation: Glas-Effekt beim Scrollen, Fortschrittsbalken,
       aktiven Menüpunkt markieren, Burger-Menü fürs Handy
    4. Einblend-Animationen beim Scrollen (.reveal -> .visible)
-   5. Zähler in der Statistik-Leiste hochzählen
-   6. Skill-Balken auf ihre Zielbreite füllen
-   7. Lichtschein auf den Skill-Karten, der der Maus folgt
-   8. Partikel-Netzwerk im Hero-Hintergrund (Canvas)
-   9. Jahreszahl im Footer automatisch setzen
+   5. Lichtschein auf den Skill-Karten, der der Maus folgt
+   6. Partikel-Netzwerk im Hero-Hintergrund (Canvas)
+   7. Jahreszahl im Footer automatisch setzen
+   8. Cookie-Banner (inkl. markierter Stelle für den Google Tag Manager)
 
    Alles ist in eine sofort ausgeführte Funktion (IIFE) gepackt,
    damit keine Variablen im globalen Scope landen.
@@ -22,7 +21,7 @@
   "use strict";
 
   // Hat der Besucher im Betriebssystem "Bewegung reduzieren" aktiviert?
-  // Dann verzichten wir auf Tipp-Effekt, Zähler-Animation und Partikel.
+  // Dann verzichten wir auf Tipp-Effekt und Partikel.
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 
@@ -34,15 +33,15 @@
      - Die englischen Texte stehen direkt im HTML und werden beim Laden
        einmal eingesammelt (englishTexts).
      - Die deutschen Texte stehen hier im Objekt germanTexts.
-     - Beim Klick auf den Button werden einfach alle Elemente mit der
-       jeweils anderen Sprache befüllt. Die Wahl wird im localStorage
-       gespeichert und beim nächsten Besuch wiederhergestellt.
+     - Beim Klick auf den Button werden alle Elemente mit der jeweils
+       anderen Sprache befüllt. Die Wahl wird im localStorage gespeichert
+       und beim nächsten Besuch wiederhergestellt.
      ------------------------------------------------------------------------ */
 
   const germanTexts = {
     // Navigation
     "nav.about": "Über mich",
-    "nav.experience": "Werdegang",
+    "nav.timeline": "Werdegang",
     "nav.skills": "Skills",
     "nav.work": "Projekte",
     "nav.contact": "Kontakt aufnehmen",
@@ -50,94 +49,64 @@
     // Hero
     "hero.badge": "Verfügbar für Freelance-Projekte",
     "hero.title": 'Hi, ich bin <span class="grad">Felix Bettenworth</span>',
-    "hero.sub": "Ich baue Online-Businesses auf und bringe sie zum Wachsen. Einige davon sind meine eigenen Amazon-Marken, andere sind Shops und Marketing-Kampagnen für meine Kunden.",
+    "hero.sub": "Ich betreibe eigene E-Commerce-Projekte und baue Shops, Kampagnen und Tracking-Setups für Kunden. Am liebsten arbeite ich an Dingen, die wirklich verkaufen.",
     "hero.cta1": "Lass uns zusammenarbeiten",
     "hero.cta2": "Das mache ich",
-    "hero.stat1": "Jahre im E-Commerce",
-    "hero.stat2": "Jahre eigene Amazon-Marken",
-    "hero.stat3": "Sprachen",
+    "hero.toolsLabel": "Womit ich täglich arbeite",
 
     // About
     "about.tag": "Über mich",
-    "about.title": "Unternehmer zuerst,<br>Entwickler und Marketer aus Leidenschaft.",
-    "about.p1": 'Ich bin <strong>E-Commerce-Unternehmer und freiberuflicher Webentwickler</strong> aus Wedel bei Hamburg. Mit meinem Unternehmen <strong>FLXUniversal</strong> führe ich seit 2022 meine eigenen <strong>Private-Label-Marken auf Amazon</strong>. Dabei mache ich alles selbst: das richtige Produkt finden, es mit Herstellern entwickeln, den Versand nach Deutschland organisieren, die Qualität prüfen, Listings schreiben und die PPC-Kampagnen steuern. Ein paar dieser Marken habe ich aufgebaut und später verkauft.',
-    "about.p2": 'Nebenbei bin ich seit 2020 als <strong>Freelancer</strong> unterwegs. Ich baue Websites und Online-Shops für Kunden, meistens mit <strong>Shopify und WooCommerce</strong>, und kümmere mich auch um ihr Marketing: Google, Meta und Microsoft Ads, SEO, Analytics und Tracking. Produktfotos, Visitenkarten oder eine Speisekarte? Habe ich auch schon gemacht.',
-    "about.p3": 'Gerade mache ich meinen <strong>B.Sc. E-Commerce an der FH Wedel</strong> fertig (Abschluss September 2026). Eine praktische Kombination: Was ich unter der Woche studiere, mache ich in der Praxis sowieso schon.',
+    "about.title": "Eigene Produkte, Kundenprojekte<br>und alles dazwischen.",
+    "about.p1": 'Zusammen mit Freunden betreibe ich ein <strong>Amazon-FBA-Business</strong>: eigene Produkte, mit Herstellern entwickelt, nach Deutschland geholt und über eigene Listings und PPC-Kampagnen verkauft. Eins unserer früheren Projekte haben wir aufgebaut und verkauft.',
+    "about.p2": '<strong>FLXUniversal</strong> ist mein Zuhause für Kundenprojekte: Webshops mit <strong>WordPress, WooCommerce und Shopify</strong>, Dropshipping-Projekte, Design-Aufträge und das Marketing dahinter, von Google Ads bis zum sauberen Tracking mit dem Google Tag Manager.',
+    "about.p3": 'Wenn ich mich festlegen müsste: <strong>Performance Marketing und die Technik dahinter</strong>. Kampagnen, Tracking und Shopsysteme aus einer Hand, zum Beispiel ein internationales B2B-Google-Shopping-Setup über mehrere Länder.',
     "about.cardTitle": "Kurz & knapp",
     "about.f1b": "Wedel / Hamburg, Deutschland",
     "about.f1s": "Offen für Remote-Projekte",
     "about.f2b": "B.Sc. E-Commerce",
-    "about.f2s": "FH Wedel · Abschluss 09/2026",
+    "about.f2s": "FH Wedel, abgeschlossen 2026",
     "about.f3b": "DE Muttersprache · EN C1/C2 · ES B1",
     "about.f3s": "Sicher im internationalen Einkauf und Vertrieb",
-    "about.f4b": "Marken aufgebaut & verkauft",
-    "about.f4s": "Mehrere eigene Amazon-FBA-Marken, einige davon verkauft",
+    "about.f4b": "Zwei Unternehmen",
+    "about.f4s": "Amazon FBA mit Freunden, FLXUniversal für Kundenprojekte",
 
-    // Experience
-    "exp.tag": "Werdegang",
-    "exp.title": "Was ich bisher aufgebaut habe.",
-    "exp.lead": "Ich betreibe eigene E-Commerce-Projekte und baue sie für andere auf. Beide Seiten machen sich gegenseitig besser.",
-    "job1.when": "Seit 2022",
-    "job1.title": "Gründer & Inhaber, eigene Amazon-FBA-Marken",
-    "job1.org": "FLXUniversal · Online-Handel",
-    "job1.b1": "Mehrere eigene Marken auf Amazon aufgebaut und geführt, von der ersten Produktidee bis zum fertigen Listing. Einige davon habe ich später verkauft.",
-    "job1.b2": "Produkt- und Marktrecherche mit Helium 10, um profitable Nischen zu finden",
-    "job1.b3": "Hersteller finden und verhandeln, den Versand nach Deutschland organisieren und die Produktqualität im Blick behalten",
-    "job1.b4": "Listings schreiben und optimieren, dazu die Amazon-PPC-Kampagnen steuern",
-    "job1.b5": "Einkauf, Kalkulation und Buchhaltung landen ebenfalls auf meinem Tisch",
-    "job2.when": "Seit 2020",
-    "job2.title": "Freiberuflicher E-Commerce- & Webentwickler",
-    "job2.org": "FLXUniversal · Kundenprojekte",
-    "job2.b1": "Websites und Online-Shops für Kunden, meistens Shopify und WooCommerce, dazu individuelles HTML, CSS und JavaScript",
-    "job2.b2": "Bezahlte Kampagnen auf Google, Meta und Microsoft Ads, vom Targeting bis zur täglichen Optimierung",
-    "job2.b3": "Keyword-Recherche und SEO für bessere organische Rankings",
-    "job2.b4": "Web-Tracking und Google-Analytics-Setups, damit meine Kunden wissen, was wirklich funktioniert",
-    "job2.b5": "Nebenbei Design-Aufträge: Visitenkarten, Speisekarten, Flyer und mehr",
-
-    // Education
-    "edu1.when": "2022 bis 2026",
-    "edu1.org": "FH Wedel · Abschluss September 2026",
-    "edu1.text": "Schwerpunkte: Online-Handel, Webentwicklung, Online-Marketing, Web-Analytics und Online-Recht. In meiner Bachelorarbeit geht es darum, wie sich die Kennzeichnung von KI-Inhalten auf Markenauthentizität und Kaufabsicht auswirkt.",
-    "edu2.title": "Abitur",
-    "edu2.org": "Schwerpunkte: Biologie & Chemie",
-    "edu2.text": "Allgemeine Hochschulreife mit naturwissenschaftlichem Schwerpunkt. Das analytische Denken von damals hilft mir heute noch bei datengetriebenen Entscheidungen.",
+    // Timeline
+    "tl.tag": "Werdegang",
+    "tl.title": "Wie ich hierher gekommen bin.",
+    "tl.lead": "Die Kurzfassung, Jahr für Jahr.",
+    "tl1.text": "Erste Freelance-Projekte noch während der Schulzeit: Websites, kleine Shops und Design-Aufträge für Kunden.",
+    "tl2.text": "Abitur gemacht, das E-Commerce-Studium an der FH Wedel gestartet und mit Freunden ein eigenes Amazon-FBA-Business gegründet.",
+    "tl3.text": "B.Sc. an der FH Wedel abgeschlossen. Meine Thesis: Wie wirkt sich die Kennzeichnung von KI-Inhalten auf die Glaubwürdigkeit im Online-Marketing aus?",
+    "tl4.year": "Heute",
+    "tl4.text": "FBA-Business und FLXUniversal laufen parallel: Shops, Kampagnen, Tracking und Dropshipping-Projekte. Eins unserer früheren Projekte ist verkauft, die aktuellen laufen weiter.",
 
     // Skills
     "skills.tag": "Skills",
-    "skills.title": "Das bringe ich mit.",
-    "skills.lead": "Alles, was es braucht, um online zu verkaufen: vom passenden Produkt bis zum profitablen Geschäft.",
-    "sk1.title": "E-Commerce & Marktplätze",
-    "sk1.l1": "Amazon FBA & Marktplatz-Management",
-    "sk1.l2": "Produkt- & Marktrecherche (Helium 10)",
-    "sk1.l3": "Sourcing, Logistik & Qualität",
-    "sk1.l4": "Listing-Optimierung",
-    "sk2.title": "Online-Marketing",
-    "sk2.l3": "SEO & Keyword-Recherche",
-    "sk3.title": "Webentwicklung",
-    "sk3.c2": "Conversion-Optimierung",
-    "sk3.c3": "Shop-Aufbau",
-    "sk4.title": "Daten & Analyse",
-    "sk4.l1": "Google Analytics & Web-Tracking",
-    "lvl.expert": "Experte",
-    "lvl.advanced": "Fortgeschritten",
-    "lvl.working": "Solide Basis",
+    "skills.title": "Mein Stack.",
+    "skills.lead": "Die Tools, mit denen ich wirklich arbeite, gruppiert nach Einsatzzweck.",
+    "sk2.title": "Shops & Webentwicklung",
+    "sk3.title": "Tracking & Daten",
+    "sk3.c3": "Web-Tracking",
+    "sk4.title": "E-Commerce & Content",
+    "sk4.c3": "Sourcing & Logistik",
+    "sk4.c4": "Listing-Optimierung",
 
     // Work
     "work.tag": "Das mache ich",
     "work.title": "Projekte & Leistungen.",
-    "work.lead": "Ein Überblick über meine Arbeit, für eigene Marken und für Kunden.",
-    "w1.title": "Eigene Amazon-Marken",
-    "w1.text": "Mehrere eigene Marken von null aufgebaut: Nischen-Recherche, Produktentwicklung mit Herstellern, Import nach Deutschland, Qualitätskontrolle, Listings und PPC. Einige davon habe ich weiterverkauft.",
-    "w2.title": "Online-Shops für Kunden",
-    "w2.text": "Conversion-starke Shopify- und WooCommerce-Shops, komplett umgesetzt: Struktur, Design, Produktpflege, Zahlungen und Launch. Individuelle Websites mit HTML, CSS und JavaScript gibt es auch.",
-    "w3.title": "Performance-Marketing",
-    "w3.text": "Bezahlte Kampagnen auf Google, Meta und Microsoft Ads: Zielgruppen-Strategie, Creatives, tägliche Optimierung und Reporting. Immer mit echten Umsatzzielen verknüpft.",
-    "w4.title": "SEO, Tracking & Analytics",
-    "w4.text": "Keyword-Recherche und On-Page-SEO für organisches Wachstum, dazu saubere Google-Analytics- und Tracking-Setups. So bleibt jeder Marketing-Euro messbar.",
-    "w5.title": "Produktfotografie",
-    "w5.text": "Produktfotos und Visuals für Amazon-Listings und Online-Shops: fotografiert, bearbeitet und auf Conversion optimiert. 3D-Renderings, wo sie Sinn ergeben.",
-    "w6.title": "Brand- & Print-Design",
-    "w6.text": "Design abseits des Webs: Visitenkarten, Speisekarten, Flyer und Marketingmaterialien, die an jedem Kontaktpunkt zur Marke passen.",
+    "work.lead": "Ein Überblick über meine Arbeit, eigene Projekte und Kundenaufträge.",
+    "w1.title": "Amazon-FBA-Business",
+    "w1.text": "Eigene Produkte auf Amazon, gemeinsam mit Freunden: Nischen-Recherche, Produktentwicklung, Import nach Deutschland, Listings und PPC. Ein früheres Projekt haben wir aufgebaut und verkauft.",
+    "w1.c3": "Eigene Produkte",
+    "w2.title": "Webshops für Kunden",
+    "w2.text": "Shops mit WordPress, WooCommerce und Shopify, komplett umgesetzt mit FLXUniversal: Struktur, Design, Produkte, Zahlungen, Launch.",
+    "w3.text": "Kampagnen auf Google, Microsoft und Meta. Bisheriges Highlight: ein internationales B2B-Google-Shopping-Setup über mehrere Länder.",
+    "w4.title": "Tracking & Analytics",
+    "w4.text": "Saubere Tracking-Setups mit Google Tag Manager und Google Analytics, Cookie-Consent inklusive. Was man nicht messen kann, kann man nicht skalieren.",
+    "w5.title": "Dropshipping-Projekte",
+    "w5.text": "Dropshipping-Stores von der Produktauswahl bis zum Fulfillment-Setup, dazu die Anzeigen, die den Traffic bringen.",
+    "w6.title": "Design & Content",
+    "w6.text": "Produktfotos, Visitenkarten, Speisekarten, Flyer und Videoschnitt in DaVinci Resolve. Die Dinge, die eine kleine Marke gut aussehen lassen.",
 
     // Sprachen
     "lang1.name": "Deutsch",
@@ -147,12 +116,35 @@
     "lang3.name": "Spanisch",
     "lang3.lvl": "Grundkenntnisse · B1",
 
+    // Insights (Bachelorarbeit)
+    "ins.tag": "Insights",
+    "ins.title": "Worum es in meiner Thesis ging.",
+    "ins.lead": "Meine Bachelorarbeit in einem Satz: Was passiert mit der Glaubwürdigkeit, wenn Marketing-Inhalte als KI-generiert gekennzeichnet werden?",
+    "ins1.title": "Die Frage",
+    "ins1.text": "KI-Inhalte sind im Marketing überall. Aber wie verändert eine offene Kennzeichnung die Art, wie Menschen Glaubwürdigkeit beurteilen?",
+    "ins2.title": "Warum es relevant ist",
+    "ins2.text": "Die Regeln zur Kennzeichnung von KI-Inhalten werden strenger und das Publikum wird skeptischer. Jede Marke, die KI nutzt, steht früher oder später vor dieser Frage.",
+    "ins3.title": "Mein Fazit",
+    "ins3.text": "KI zu verstecken wird bald keine Option mehr sein. Marken, die früh lernen, transparent damit umzugehen, haben es leichter. Über Details rede ich gern.",
+
+    // Warum ich
+    "why.tag": "Warum ich",
+    "why.title": "Warum mit mir arbeiten.",
+    "why.lead": "Der ehrliche Pitch, ohne Buzzwords.",
+    "why1.title": "Du bekommst mich, keine Ticketnummer",
+    "why1.text": "Ich bin Freelancer mit bewusst kleiner Kundenliste. Dein Projekt landet nicht irgendwo in einer Warteschlange, sondern auf meinem Tisch und bekommt meine volle Aufmerksamkeit.",
+    "why2.title": "Schnelle Antworten, kurze Wege",
+    "why2.text": "Keine Account-Manager, keine Meetings über Meetings. Du schreibst mir, ich antworte, meistens innerhalb von 24 Stunden. Und wenn etwas schnell gehen muss, bin ich flexibel.",
+    "why3.title": "Ich habe etwas zu beweisen",
+    "why3.text": "Ich bin jung und baue mir gerade meinen Ruf auf. Für dich ist das gut: Ich kann mir keinen schlampigen Job leisten und behandle jedes Projekt so, als hinge mein eigenes Business daran. Tut es nämlich auch.",
+    "why4.title": "Ich betreibe selbst Shops",
+    "why4.text": "Ich gebe mein eigenes Geld für Ads aus und lebe von den Ergebnissen. Deshalb verkaufe ich dir nichts, was du nicht brauchst. Wenn sich etwas nicht lohnt, sage ich es dir ehrlich.",
+
     // Kontakt
     "contact.tag": "Kontakt",
     "contact.title": "Lass uns etwas bauen,<br>das sich verkauft.",
-    "contact.text": "Egal ob neuer Shop, Marketing-Kampagne oder Amazon-Projekt: Erzähl mir davon. Ich antworte meistens innerhalb von 24 Stunden.",
+    "contact.text": "Egal ob Shop, Kampagne oder Tracking-Setup: Erzähl mir davon. Ich antworte meistens innerhalb von 24 Stunden.",
     "contact.emailLabel": "E-Mail",
-    "contact.phoneLabel": "Telefon",
     "contact.locLabel": "Standort",
     "contact.loc": "Wedel / Hamburg, Deutschland",
     "contact.btn": "Schreib mir eine E-Mail",
@@ -169,18 +161,16 @@
 
   // Die Rollen für den Tipp-Effekt gibt es ebenfalls in beiden Sprachen
   const rolesEn = [
-    "Amazon FBA Entrepreneur",
-    "Web Developer & Freelancer",
+    "E-Commerce Entrepreneur",
     "Performance Marketer",
-    "Shopify & WooCommerce Expert",
-    "E-Commerce Manager"
+    "Web Developer",
+    "Online Marketing Manager"
   ];
   const rolesDe = [
-    "Amazon-FBA-Unternehmer",
-    "Webentwickler & Freelancer",
+    "E-Commerce-Unternehmer",
     "Performance-Marketer",
-    "Shopify- & WooCommerce-Experte",
-    "E-Commerce-Manager"
+    "Webentwickler",
+    "Online-Marketing-Manager"
   ];
 
   const i18nElements = document.querySelectorAll("[data-i18n]");
@@ -390,76 +380,7 @@
 
 
   /* ------------------------------------------------------------------------
-     5. Zähler in der Statistik-Leiste
-     Zählt von 0 auf den Zielwert (data-target), sobald die Zahl sichtbar
-     wird. Die Kurve (1 - (1-p)^3) startet schnell und bremst zum Ende ab.
-     ------------------------------------------------------------------------ */
-
-  const COUNT_DURATION = 1400; // ms für den kompletten Hochzähl-Vorgang
-
-  const counterElements = document.querySelectorAll(".count");
-
-  const counterObserver = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      counterObserver.unobserve(entry.target);
-
-      const element = entry.target;
-      const targetValue = Number(element.dataset.target);
-
-      if (reducedMotion) {
-        element.textContent = targetValue;
-        return;
-      }
-
-      let startTime = null;
-
-      function countStep(timestamp) {
-        if (!startTime) startTime = timestamp;
-
-        const progress = Math.min((timestamp - startTime) / COUNT_DURATION, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-
-        element.textContent = Math.round(targetValue * eased);
-
-        if (progress < 1) {
-          requestAnimationFrame(countStep);
-        }
-      }
-
-      requestAnimationFrame(countStep);
-    });
-  }, { threshold: 0.5 });
-
-  counterElements.forEach(function (counter) {
-    counterObserver.observe(counter);
-  });
-
-
-  /* ------------------------------------------------------------------------
-     6. Skill-Balken
-     Die Balken starten im CSS bei width: 0. Sobald einer sichtbar wird,
-     setzen wir seine Breite auf den Zielwert aus data-w — die Transition
-     im CSS macht daraus die Füll-Animation.
-     ------------------------------------------------------------------------ */
-
-  const skillBars = document.querySelectorAll(".bar i");
-
-  const barObserver = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      barObserver.unobserve(entry.target);
-      entry.target.style.width = entry.target.dataset.w + "%";
-    });
-  }, { threshold: 0.4 });
-
-  skillBars.forEach(function (bar) {
-    barObserver.observe(bar);
-  });
-
-
-  /* ------------------------------------------------------------------------
-     7. Lichtschein auf den Skill-Karten
+     5. Lichtschein auf den Skill-Karten
      Bei jeder Mausbewegung wird die Position relativ zur Karte in die
      CSS-Variablen --mx / --my geschrieben. Das ::after-Overlay im CSS
      legt an genau diese Stelle einen radialen Verlauf.
@@ -475,7 +396,7 @@
 
 
   /* ------------------------------------------------------------------------
-     8. Partikel-Netzwerk im Hero
+     6. Partikel-Netzwerk im Hero
      Punkte treiben langsam über ein Canvas und prallen an den Rändern ab.
      Kommen sich zwei Punkte näher als 130px, wird eine Linie zwischen
      ihnen gezeichnet — je näher, desto kräftiger.
@@ -583,7 +504,7 @@
 
 
   /* ------------------------------------------------------------------------
-     9. Jahreszahl im Footer
+     7. Jahreszahl im Footer
      Immer aktuell, muss nie von Hand gepflegt werden.
      ------------------------------------------------------------------------ */
 
@@ -591,7 +512,7 @@
 
 
   /* ------------------------------------------------------------------------
-     10. Cookie-Banner
+     8. Cookie-Banner
      Ablauf:
      - Beim Laden wird geprüft, ob schon eine Entscheidung gespeichert ist
        (localStorage-Schlüssel "cookieConsent": "accepted" oder "declined").
