@@ -1,0 +1,1226 @@
+/* ==========================================================================
+   Felix Bettenworth — Portfolio
+   style.css
+   --------------------------------------------------------------------------
+   Aufbau der Datei:
+   1.  Variablen & Grundgerüst
+   2.  Scroll-Fortschrittsbalken
+   3.  Navigation
+   4.  Hero (Startbereich)
+   5.  Section-Überschriften (wiederverwendet)
+   6.  About
+   7.  Experience (Timeline)
+   8.  Education (Ausbildung)
+   9.  Skills
+   10. Work (Projekte & Services)
+   11. Sprachen
+   12. Kontakt
+   13. Footer
+   14. Scroll-Animationen (Reveal)
+   15. Reduzierte Bewegung (Barrierefreiheit)
+   16. Responsive (Tablet & Handy)
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. Variablen & Grundgerüst
+   Alle Farben und Grundwerte liegen zentral in :root.
+   Wer das Farbschema ändern will, muss nur hier anfassen.
+   -------------------------------------------------------------------------- */
+
+:root {
+  /* Hintergründe */
+  --bg: #060a12;                        /* Seitenhintergrund, fast schwarz */
+  --bg-soft: #0b1220;                   /* etwas helleres Dunkelblau */
+
+  /* Kartenflächen und Ränder (halbtransparentes Weiß) */
+  --surface: rgba(255, 255, 255, .04);
+  --surface-strong: rgba(255, 255, 255, .07);
+  --border: rgba(255, 255, 255, .09);
+
+  /* Textfarben */
+  --text: #e8eef7;                      /* Haupttext, helles Grau-Blau */
+  --muted: #94a3b8;                     /* Nebentext, gedämpft */
+
+  /* Akzentfarben */
+  --accent: #38bdf8;                    /* Himmelblau */
+  --accent-2: #818cf8;                  /* Violett */
+  --accent-3: #2dd4bf;                  /* Türkis */
+  --grad: linear-gradient(120deg, #38bdf8, #818cf8 55%, #2dd4bf);
+
+  /* Sonstiges */
+  --radius: 18px;                                /* Standard-Eckenrundung */
+  --font-head: "Space Grotesk", sans-serif;      /* Überschriften */
+  --font-body: "Inter", sans-serif;              /* Fließtext */
+}
+
+/* Reset: Browser-Standardabstände entfernen */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;      /* sanftes Scrollen bei Anker-Links */
+  scroll-padding-top: 90px;     /* Platz für die fixe Navigation beim Anspringen */
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.65;
+  overflow-x: hidden;           /* verhindert Querscrollen durch die Farb-Orbs */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Markierter Text in Akzentfarbe */
+::selection {
+  background: rgba(56, 189, 248, .35);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-head);
+  line-height: 1.15;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Zentrierter Inhaltsbereich mit fester Maximalbreite */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section {
+  padding: 110px 0;
+  position: relative;
+}
+
+
+/* --------------------------------------------------------------------------
+   2. Scroll-Fortschrittsbalken
+   Dünner Balken ganz oben. Die Breite setzt script.js beim Scrollen.
+   -------------------------------------------------------------------------- */
+
+#progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: var(--grad);
+  z-index: 1001;
+  transition: width .1s linear;
+}
+
+
+/* --------------------------------------------------------------------------
+   3. Navigation
+   Fix am oberen Rand. Bekommt per JS die Klasse .scrolled,
+   sobald man nach unten scrollt -> dann dunkler Glas-Effekt.
+   -------------------------------------------------------------------------- */
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  border-bottom: 1px solid transparent;
+  transition: background .3s, border-color .3s, backdrop-filter .3s;
+}
+
+nav.scrolled {
+  background: rgba(6, 10, 18, .75);
+  backdrop-filter: blur(14px);
+  border-bottom-color: var(--border);
+}
+
+.nav-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo "Felix.B" — das ".B" bekommt den Farbverlauf */
+.logo {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: .5px;
+}
+
+.logo span {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  gap: 34px;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: .92rem;
+  color: var(--muted);
+  font-weight: 500;
+  position: relative;
+  transition: color .25s;
+}
+
+/* Unterstrich, der bei Hover / aktivem Abschnitt von links reinwächst */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: var(--grad);
+  border-radius: 2px;
+  transition: width .25s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--text);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+/* "Get in touch"-Button rechts in der Navigation */
+.nav-cta {
+  border: 1px solid var(--border);
+  padding: 9px 20px;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text) !important;
+  transition: border-color .25s, background .25s;
+}
+
+.nav-cta:hover {
+  border-color: var(--accent);
+  background: rgba(56, 189, 248, .1);
+}
+
+.nav-cta::after {
+  display: none;    /* der Button braucht keinen Unterstrich */
+}
+
+/* Burger-Menü: nur auf dem Handy sichtbar (siehe Abschnitt 16).
+   Die drei <span> sind die Striche — mit .open werden sie zum X gedreht. */
+#burger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  z-index: 1002;
+}
+
+#burger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  margin: 5px 0;
+  border-radius: 2px;
+  transition: transform .3s, opacity .3s;
+}
+
+#burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+#burger.open span:nth-child(2) { opacity: 0; }
+#burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
+/* --------------------------------------------------------------------------
+   4. Hero (Startbereich)
+   Ebenen von hinten nach vorn:
+   Canvas (Partikel, per JS gezeichnet) -> Gitter -> Farb-Orbs -> Inhalt
+   -------------------------------------------------------------------------- */
+
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 140px 0 80px;
+  overflow: hidden;
+}
+
+/* Zeichenfläche für das Partikel-Netzwerk (füllt den ganzen Hero) */
+#particles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Die zwei weichen Farbflecken im Hintergrund:
+   einfache runde Divs, stark weichgezeichnet, schweben langsam auf und ab. */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: .35;
+  pointer-events: none;
+  animation: float 14s ease-in-out infinite;
+}
+
+.orb-1 {
+  width: 480px;
+  height: 480px;
+  background: #0e7490;      /* Petrol */
+  top: -120px;
+  right: -100px;
+}
+
+.orb-2 {
+  width: 420px;
+  height: 420px;
+  background: #4338ca;      /* Indigo */
+  bottom: -140px;
+  left: -120px;
+  animation-delay: -7s;     /* versetzt, damit sie nicht synchron schweben */
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(40px) scale(1.06); }
+}
+
+/* Dezentes Gitternetz — reines CSS aus zwei Verlaufslinien.
+   Die mask-image blendet es zu den Rändern hin aus. */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 820px;
+}
+
+/* Kleines "Available"-Badge mit pulsierendem grünem Punkt */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: .85rem;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+.badge .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 0 0 rgba(52, 211, 153, .6);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  70%  { box-shadow: 0 0 0 9px rgba(52, 211, 153, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
+
+/* Große Überschrift — clamp() skaliert die Schrift mit der Fensterbreite */
+#hero h1 {
+  font-size: clamp(2.6rem, 6.5vw, 4.6rem);
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  margin-bottom: 18px;
+}
+
+#hero h1 .grad {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Zeile mit dem Tipp-Effekt (der Text kommt aus script.js) */
+.type-line {
+  font-family: var(--font-head);
+  font-size: clamp(1.25rem, 2.6vw, 1.7rem);
+  font-weight: 600;
+  color: var(--muted);
+  min-height: 2.2em;      /* reserviert Platz, damit beim Tippen nichts springt */
+  margin-bottom: 22px;
+}
+
+/* Blinkender Cursor hinter dem getippten Text */
+.type-line .caret {
+  display: inline-block;
+  width: 3px;
+  height: 1.1em;
+  background: var(--accent);
+  vertical-align: -.15em;
+  margin-left: 4px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+#typed {
+  color: var(--text);
+}
+
+.hero-sub {
+  color: var(--muted);
+  font-size: 1.08rem;
+  max-width: 620px;
+  margin-bottom: 38px;
+}
+
+/* Buttons */
+.btn-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 64px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 30px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: .98rem;
+  cursor: pointer;
+  transition: transform .25s, box-shadow .25s, background .25s, border-color .25s;
+}
+
+.btn-primary {
+  background: var(--grad);
+  color: #04121d;
+  box-shadow: 0 8px 30px rgba(56, 189, 248, .28);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(56, 189, 248, .4);
+}
+
+.btn-ghost {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.btn-ghost:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+}
+
+/* Zahlen-Leiste unter den Buttons (6+ Jahre, 4+ Jahre, 3 Sprachen).
+   Die Zahlen zählt script.js hoch, sobald sie sichtbar werden. */
+.hero-stats {
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(11, 18, 32, .55);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+  max-width: 720px;
+}
+
+.stat {
+  flex: 1 1 200px;
+  padding: 22px 28px;
+  border-right: 1px solid var(--border);
+}
+
+.stat:last-child {
+  border-right: none;
+}
+
+.stat b {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 1.7rem;
+  font-weight: 700;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.stat span {
+  font-size: .85rem;
+  color: var(--muted);
+}
+
+
+/* --------------------------------------------------------------------------
+   5. Section-Überschriften
+   Jede Section nutzt dasselbe Muster: kleines Label, Titel, Einleitung.
+   -------------------------------------------------------------------------- */
+
+.sec-tag {
+  display: inline-block;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.sec-title {
+  font-size: clamp(1.9rem, 4vw, 2.7rem);
+  font-weight: 700;
+  letter-spacing: -.5px;
+  margin-bottom: 18px;
+}
+
+.sec-lead {
+  color: var(--muted);
+  max-width: 640px;
+  margin-bottom: 56px;
+}
+
+
+/* --------------------------------------------------------------------------
+   6. About
+   Links Text, rechts die "Quick facts"-Karte.
+   -------------------------------------------------------------------------- */
+
+#about {
+  /* ganz leichte Aufhellung, damit sich die Section vom Rest absetzt */
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, .015) 50%, transparent);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.about-text p {
+  color: var(--muted);
+  margin-bottom: 18px;
+  font-size: 1.03rem;
+}
+
+.about-text p strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.about-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Farbige Linie am oberen Kartenrand */
+.about-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--grad);
+}
+
+.about-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 20px;
+}
+
+/* Eine Zeile in der Facts-Karte: Icon + Text */
+.fact {
+  display: flex;
+  gap: 14px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: .95rem;
+}
+
+.fact:last-child {
+  border-bottom: none;
+}
+
+.fact .ico {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border-radius: 10px;
+  background: rgba(56, 189, 248, .12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
+
+.fact b {
+  display: block;
+  font-weight: 600;
+}
+
+.fact span {
+  color: var(--muted);
+  font-size: .88rem;
+}
+
+
+/* --------------------------------------------------------------------------
+   7. Experience (Timeline)
+   Vertikale Linie links, daneben die Stationen als Karten.
+   -------------------------------------------------------------------------- */
+
+.timeline {
+  position: relative;
+  margin-top: 10px;
+}
+
+/* Die durchgehende Linie */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2), transparent);
+}
+
+.t-item {
+  position: relative;
+  padding: 0 0 54px 68px;
+}
+
+.t-item:last-child {
+  padding-bottom: 0;
+}
+
+/* Punkt auf der Linie (Ring, der Kern kommt über ::after) */
+.t-dot {
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bg-soft);
+  border: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.t-dot::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.t-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 30px 32px;
+  transition: transform .3s, border-color .3s, background .3s;
+}
+
+/* Karte rückt bei Hover leicht nach rechts */
+.t-card:hover {
+  transform: translateX(6px);
+  border-color: rgba(56, 189, 248, .4);
+  background: var(--surface-strong);
+}
+
+.t-when {
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.t-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 4px;
+}
+
+.t-org {
+  color: var(--muted);
+  font-size: .93rem;
+  margin-bottom: 16px;
+}
+
+.t-card ul {
+  list-style: none;
+}
+
+/* Aufzählungspunkte mit eigenem Pfeil-Symbol statt Standard-Bullet */
+.t-card li {
+  color: var(--muted);
+  font-size: .95rem;
+  padding: 5px 0 5px 24px;
+  position: relative;
+}
+
+.t-card li::before {
+  content: "▹";
+  position: absolute;
+  left: 0;
+  color: var(--accent-3);
+}
+
+/* Kleine Schlagwort-Chips (werden auch bei Skills & Work genutzt) */
+.t-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.chip {
+  font-size: .78rem;
+  font-weight: 500;
+  padding: 5px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, .03);
+  color: var(--muted);
+}
+
+
+/* --------------------------------------------------------------------------
+   8. Education (Ausbildung)
+   Zwei Karten nebeneinander unter der Timeline.
+   -------------------------------------------------------------------------- */
+
+.edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 46px;
+}
+
+.edu-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 30px;
+  transition: transform .3s, border-color .3s;
+}
+
+.edu-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(129, 140, 248, .45);
+}
+
+.edu-card .t-when {
+  color: var(--accent-2);    /* violett statt blau, zur Unterscheidung */
+}
+
+.edu-card h4 {
+  font-family: var(--font-head);
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+}
+
+.edu-card .t-org {
+  margin-bottom: 12px;
+}
+
+.edu-card p {
+  color: var(--muted);
+  font-size: .92rem;
+}
+
+
+/* --------------------------------------------------------------------------
+   9. Skills
+   Vier Karten im 2x2-Raster mit animierten Balken.
+   Der Lichtschein, der dem Mauszeiger folgt, funktioniert so:
+   script.js schreibt die Mausposition in die Variablen --mx / --my,
+   und das ::after-Overlay legt an genau diese Stelle einen radialen Verlauf.
+   -------------------------------------------------------------------------- */
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.skill-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: transform .3s, border-color .3s;
+}
+
+/* Lichtschein-Overlay (unsichtbar, bis die Maus über der Karte ist) */
+.skill-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    500px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(56, 189, 248, .08),
+    transparent 45%
+  );
+  opacity: 0;
+  transition: opacity .3s;
+  pointer-events: none;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(56, 189, 248, .35);
+}
+
+.skill-card:hover::after {
+  opacity: 1;
+}
+
+.skill-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.skill-head .ico {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(56, 189, 248, .12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  flex: none;
+}
+
+.skill-head h3 {
+  font-size: 1.12rem;
+}
+
+/* Skill-Balken: Beschriftung + Balken.
+   Der innere <i>-Balken startet bei width: 0. script.js setzt ihn auf
+   seinen Zielwert (data-w), sobald er ins Bild scrollt — die transition
+   hier sorgt dann für die Füll-Animation. */
+.bar-row {
+  margin-bottom: 15px;
+}
+
+.bar-row .bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: .88rem;
+  margin-bottom: 7px;
+}
+
+.bar-row .bar-label span:last-child {
+  color: var(--muted);
+  font-size: .8rem;
+}
+
+.bar {
+  height: 7px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, .07);
+  overflow: hidden;
+}
+
+.bar i {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 99px;
+  background: var(--grad);
+  transition: width 1.2s cubic-bezier(.22, .9, .35, 1);
+}
+
+.skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 6px;
+}
+
+
+/* --------------------------------------------------------------------------
+   10. Work (Projekte & Services)
+   Sechs Karten im 3er-Raster. Bei Hover hebt sich die Karte an
+   und oben wächst eine Farblinie von links rein (::before).
+   -------------------------------------------------------------------------- */
+
+#work {
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, .015) 50%, transparent);
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.work-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: transform .35s, border-color .35s, box-shadow .35s;
+}
+
+/* Farblinie am oberen Rand, anfangs auf Breite 0 zusammengeschoben */
+.work-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--grad);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s;
+}
+
+.work-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(56, 189, 248, .4);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, .45);
+}
+
+.work-card:hover::before {
+  transform: scaleX(1);
+}
+
+.work-card .ico {
+  width: 50px;
+  height: 50px;
+  border-radius: 13px;
+  background: rgba(56, 189, 248, .12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.work-card h3 {
+  font-size: 1.13rem;
+  margin-bottom: 10px;
+}
+
+.work-card p {
+  color: var(--muted);
+  font-size: .93rem;
+  flex: 1;    /* drückt die Chips ans untere Kartenende */
+}
+
+.work-card .t-tags {
+  margin-top: 20px;
+}
+
+
+/* --------------------------------------------------------------------------
+   11. Sprachen
+   Drei schlichte Karten in einer Reihe.
+   -------------------------------------------------------------------------- */
+
+.lang-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 60px;
+}
+
+.lang-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lang-card b {
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+}
+
+.lang-card span {
+  color: var(--muted);
+  font-size: .85rem;
+}
+
+
+/* --------------------------------------------------------------------------
+   12. Kontakt
+   Eine große Karte mit E-Mail, Telefon und Standort.
+   -------------------------------------------------------------------------- */
+
+.contact-wrap {
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  background:
+    radial-gradient(900px circle at 20% 0%, rgba(56, 189, 248, .09), transparent 55%),
+    var(--surface);
+  padding: 72px 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-wrap h2 {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  margin-bottom: 16px;
+}
+
+.contact-wrap > p {
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 auto 42px;
+}
+
+.contact-cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 46px;
+}
+
+.c-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(6, 10, 18, .5);
+  padding: 18px 30px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: transform .25s, border-color .25s;
+}
+
+.c-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.c-card .ico {
+  color: var(--accent);
+}
+
+.c-card div {
+  text-align: left;
+}
+
+.c-card span {
+  display: block;
+  font-size: .78rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.c-card b {
+  font-size: .95rem;
+  font-weight: 600;
+}
+
+
+/* --------------------------------------------------------------------------
+   13. Footer
+   -------------------------------------------------------------------------- */
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 34px 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: .88rem;
+}
+
+footer .logo {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+
+/* --------------------------------------------------------------------------
+   14. Scroll-Animationen (Reveal)
+   Alles mit der Klasse .reveal startet unsichtbar und leicht nach unten
+   verschoben. script.js hängt .visible an, sobald das Element ins
+   Sichtfeld scrollt -> es blendet sanft ein.
+   data-delay="1" bis "3" staffelt benachbarte Elemente zeitlich.
+   -------------------------------------------------------------------------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity .8s cubic-bezier(.22, .9, .35, 1),
+    transform .8s cubic-bezier(.22, .9, .35, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal[data-delay="1"] { transition-delay: .12s; }
+.reveal[data-delay="2"] { transition-delay: .24s; }
+.reveal[data-delay="3"] { transition-delay: .36s; }
+
+
+/* --------------------------------------------------------------------------
+   15. Reduzierte Bewegung
+   Wer im Betriebssystem "Bewegung reduzieren" aktiviert hat,
+   bekommt alle Animationen abgeschaltet (Barrierefreiheit).
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   16. Responsive
+   Zwei Stufen: Tablet (bis 920px) und Handy (bis 640px).
+   -------------------------------------------------------------------------- */
+
+/* Tablet: Raster auf eine bzw. zwei Spalten reduzieren */
+@media (max-width: 920px) {
+  .about-grid,
+  .skills-grid,
+  .edu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .work-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lang-strip {
+    grid-template-columns: 1fr;
+  }
+
+  section {
+    padding: 80px 0;
+  }
+}
+
+/* Handy: Burger-Menü aktiv, alles einspaltig */
+@media (max-width: 640px) {
+  /* Menü wird zum Vollbild-Overlay, das von rechts reinfährt */
+  .nav-links {
+    position: fixed;
+    inset: 0;
+    background: rgba(6, 10, 18, .96);
+    backdrop-filter: blur(16px);
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    transform: translateX(100%);
+    transition: transform .35s;
+    z-index: 1001;
+  }
+
+  .nav-links.open {
+    transform: translateX(0);
+  }
+
+  .nav-links a {
+    font-size: 1.25rem;
+  }
+
+  #burger {
+    display: block;
+  }
+
+  .work-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+  }
+
+  .stat {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat:last-child {
+    border-bottom: none;
+  }
+
+  .contact-wrap {
+    padding: 52px 24px;
+  }
+}
