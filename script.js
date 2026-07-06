@@ -158,7 +158,13 @@
     "contact.btn": "Schreib mir eine E-Mail",
 
     // Footer
-    "footer.text": "FLXUniversal · Felix Bettenworth · Wedel, Deutschland"
+    "footer.text": "FLXUniversal · Felix Bettenworth · Wedel, Deutschland",
+
+    // Cookie-Banner
+    "cookie.title": "Kurze Cookie-Frage",
+    "cookie.text": "Ich nutze Cookies, um zu sehen, wie die Seite genutzt wird, und um sie besser zu machen. In Ordnung für dich?",
+    "cookie.decline": "Nein danke",
+    "cookie.accept": "Akzeptieren"
   };
 
   // Die Rollen für den Tipp-Effekt gibt es ebenfalls in beiden Sprachen
@@ -585,6 +591,86 @@
 
 
   /* ------------------------------------------------------------------------
+     10. Cookie-Banner
+     Ablauf:
+     - Beim Laden wird geprüft, ob schon eine Entscheidung gespeichert ist
+       (localStorage-Schlüssel "cookieConsent": "accepted" oder "declined").
+     - Wenn nicht, taucht das Banner nach einer Sekunde auf.
+     - "Akzeptieren" speichert die Zustimmung und ruft activateTracking()
+       auf. "Nein danke" speichert die Ablehnung, es wird nichts geladen.
+     - Bei späteren Besuchen mit gespeicherter Zustimmung läuft
+       activateTracking() direkt beim Laden, ohne Banner.
+
+     >>> GOOGLE TAG MANAGER: Der GTM-Code kommt in activateTracking(). <<<
+     So wird er garantiert erst nach der Zustimmung geladen (DSGVO).
+     Zusätzlich wird das Event "cookie_consent_granted" in den dataLayer
+     gepusht. Das kann im GTM direkt als Trigger genutzt werden.
+     ------------------------------------------------------------------------ */
+
+  const CONSENT_KEY = "cookieConsent";
+  const cookieBanner = document.getElementById("cookieBanner");
+  const acceptButton = document.getElementById("cookieAccept");
+  const declineButton = document.getElementById("cookieDecline");
+
+  function getConsent() {
+    try {
+      return localStorage.getItem(CONSENT_KEY);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function saveConsent(value) {
+    try {
+      localStorage.setItem(CONSENT_KEY, value);
+    } catch (e) { /* localStorage blockiert: Banner kommt dann eben wieder */ }
+  }
+
+  function activateTracking() {
+    // Event für den Google Tag Manager bereitstellen
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "cookie_consent_granted" });
+
+    // ================================================================
+    // >>> HIER später das Google-Tag-Manager-Snippet einfügen <<<
+    // (den <script>-Teil aus dem GTM-Container, als JS-Code)
+    // ================================================================
+  }
+
+  function hideBanner() {
+    cookieBanner.classList.remove("show");
+    // erst nach der Ausblend-Animation komplett aus dem Layout nehmen
+    setTimeout(function () {
+      cookieBanner.hidden = true;
+    }, 400);
+  }
+
+  const consent = getConsent();
+
+  if (consent === "accepted") {
+    // Zustimmung liegt schon vor: Tracking direkt aktivieren, kein Banner
+    activateTracking();
+  } else if (consent !== "declined") {
+    // Noch keine Entscheidung: Banner nach kurzer Verzögerung einblenden
+    cookieBanner.hidden = false;
+    setTimeout(function () {
+      cookieBanner.classList.add("show");
+    }, 1000);
+  }
+
+  acceptButton.addEventListener("click", function () {
+    saveConsent("accepted");
+    activateTracking();
+    hideBanner();
+  });
+
+  declineButton.addEventListener("click", function () {
+    saveConsent("declined");
+    hideBanner();
+  });
+
+
+  /* ------------------------------------------------------------------------
      Start: gespeicherte Sprachwahl wiederherstellen (Standard: Englisch).
      Steht hier am Ende, weil setLanguage() den Tipp-Effekt startet und
      dafür alle Funktionen oben schon definiert sein müssen.
@@ -598,5 +684,4 @@
   setLanguage(savedLang);
 
 })();
-
 
