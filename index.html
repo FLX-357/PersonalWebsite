@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Felix Bettenworth — E-Commerce Entrepreneur & Web Developer</title>
-<meta name="description" content="Felix Bettenworth — Amazon FBA entrepreneur, freelance web developer and performance marketer based near Hamburg, Germany. I build, market and scale online businesses.">
-<meta property="og:title" content="Felix Bettenworth — E-Commerce Entrepreneur & Web Developer">
-<meta property="og:description" content="I build, market and scale online businesses — from my own Amazon private-label brands to high-converting stores and campaigns for clients.">
+<title>Felix Bettenworth | FLXUniversal · E-Commerce & Web Development</title>
+<meta name="description" content="Felix Bettenworth, founder of FLXUniversal: Amazon FBA entrepreneur, freelance web developer and performance marketer from the Hamburg area. I build, market and grow online businesses.">
+<meta property="og:title" content="Felix Bettenworth | FLXUniversal · E-Commerce & Web Development">
+<meta property="og:description" content="I build and grow online businesses. Some are my own Amazon brands, others are shops and campaigns I run for clients.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1220'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='28' font-weight='700' fill='%2338bdf8' text-anchor='middle'%3EFB%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,17 +17,23 @@
 <body>
 <div id="progress"></div>
 
+<!-- Navigation.
+     Alle Elemente mit data-i18n bekommen ihre deutsche Übersetzung
+     aus script.js, sobald der DE/EN-Button gedrückt wird. -->
 <nav id="nav">
   <div class="nav-inner">
-    <a href="#hero" class="logo">Felix<span>.B</span></a>
-    <button id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#contact" class="nav-cta">Get in touch</a></li>
-    </ul>
+    <a href="#hero" class="logo">Flx<span>.357</span></a>
+    <div class="nav-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" data-i18n="nav.about">About</a></li>
+        <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+        <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+        <li><a href="#work" data-i18n="nav.work">Work</a></li>
+        <li><a href="#contact" class="nav-cta" data-i18n="nav.contact">Get in touch</a></li>
+      </ul>
+      <button id="langToggle" aria-label="Sprache wechseln / switch language">DE</button>
+      <button id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </nav>
 
@@ -38,20 +44,20 @@
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="container hero-content">
-    <div class="badge"><span class="dot"></span>Available for freelance projects</div>
-    <h1>Hi, I'm <span class="grad">Felix Bettenworth</span></h1>
+    <div class="badge"><span class="dot"></span><span data-i18n="hero.badge">Available for freelance projects</span></div>
+    <h1 data-i18n="hero.title">Hi, I'm <span class="grad">Felix Bettenworth</span></h1>
     <div class="type-line"><span id="typed"></span><span class="caret"></span></div>
-    <p class="hero-sub">I build, market and scale online businesses — from my own Amazon private-label brands to high-converting stores and performance campaigns for clients.</p>
+    <p class="hero-sub" data-i18n="hero.sub">I build and grow online businesses. Some of them are my own Amazon brands, others are shops and marketing campaigns I run for my clients.</p>
     <div class="btn-row">
-      <a href="#contact" class="btn btn-primary">Let's work together
+      <a href="#contact" class="btn btn-primary"><span data-i18n="hero.cta1">Let's work together</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <a href="#work" class="btn btn-ghost">See what I do</a>
+      <a href="#work" class="btn btn-ghost" data-i18n="hero.cta2">See what I do</a>
     </div>
     <div class="hero-stats">
-      <div class="stat"><b><span class="count" data-target="6">0</span>+</b><span>Years in e-commerce</span></div>
-      <div class="stat"><b><span class="count" data-target="4">0</span>+</b><span>Years running Amazon brands</span></div>
-      <div class="stat"><b><span class="count" data-target="3">0</span></b><span>Languages spoken</span></div>
+      <div class="stat"><b><span class="count" data-target="6">0</span>+</b><span data-i18n="hero.stat1">Years in e-commerce</span></div>
+      <div class="stat"><b><span class="count" data-target="4">0</span>+</b><span data-i18n="hero.stat2">Years running Amazon brands</span></div>
+      <div class="stat"><b><span class="count" data-target="3">0</span></b><span data-i18n="hero.stat3">Languages spoken</span></div>
     </div>
   </div>
 </section>
@@ -59,31 +65,31 @@
 <!-- ================= ABOUT ================= -->
 <section id="about">
   <div class="container">
-    <span class="sec-tag reveal">About me</span>
-    <h2 class="sec-title reveal">Entrepreneur first,<br>developer &amp; marketer by craft.</h2>
+    <span class="sec-tag reveal" data-i18n="about.tag">About me</span>
+    <h2 class="sec-title reveal" data-i18n="about.title">Entrepreneur first,<br>developer and marketer by craft.</h2>
     <div class="about-grid">
       <div class="about-text">
-        <p class="reveal">I'm an <strong>e-commerce entrepreneur and freelance web developer</strong> from Wedel, near Hamburg. Since 2022 I've built and run my own <strong>private-label brands on Amazon</strong> — covering the entire journey from product research and development, supplier sourcing and negotiation, logistics to Germany and quality management, through to listing optimization and Amazon PPC. Several of my brands I've successfully built up and sold.</p>
-        <p class="reveal" data-delay="1">Alongside that, I've worked as a <strong>freelancer since 2020</strong>, creating websites and online shops for clients — mainly on <strong>Shopify and WooCommerce</strong> — and running their marketing: Google, Meta and Microsoft Ads, SEO, analytics and tracking. I also handle product photography and design work, from business cards to restaurant menus.</p>
-        <p class="reveal" data-delay="2">I'm currently completing my <strong>B.Sc. in E-Commerce at FH Wedel</strong> (graduating September 2026), where theory meets what I practice every day: online retail, web development, marketing, analytics and e-commerce law.</p>
+        <p class="reveal" data-i18n="about.p1">I'm an <strong>e-commerce entrepreneur and freelance web developer</strong> from Wedel, just outside Hamburg. With my company <strong>FLXUniversal</strong> I've been running my own <strong>private-label brands on Amazon</strong> since 2022. I handle everything myself: finding the right product, developing it with manufacturers, getting it shipped to Germany, checking quality, writing the listings and running the PPC campaigns. A few of those brands I've built up and later sold.</p>
+        <p class="reveal" data-delay="1" data-i18n="about.p2">On top of that, I've been <strong>freelancing since 2020</strong>. I build websites and online shops for clients, mostly on <strong>Shopify and WooCommerce</strong>, and take care of their marketing too: Google, Meta and Microsoft Ads, SEO, analytics and tracking. Product photos, business cards or a restaurant menu? Done those as well.</p>
+        <p class="reveal" data-delay="2" data-i18n="about.p3">Right now I'm finishing my <strong>B.Sc. in E-Commerce at FH Wedel</strong> (done in September 2026). It's a handy combination: what I study during the week is exactly what I already do in practice.</p>
       </div>
       <aside class="about-card reveal" data-delay="1">
-        <h3>Quick facts</h3>
+        <h3 data-i18n="about.cardTitle">Quick facts</h3>
         <div class="fact">
           <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
-          <div><b>Wedel / Hamburg, Germany</b><span>Open to remote work</span></div>
+          <div><b data-i18n="about.f1b">Wedel / Hamburg, Germany</b><span data-i18n="about.f1s">Open to remote work</span></div>
         </div>
         <div class="fact">
           <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
-          <div><b>B.Sc. E-Commerce</b><span>FH Wedel · graduating 09/2026</span></div>
+          <div><b data-i18n="about.f2b">B.Sc. E-Commerce</b><span data-i18n="about.f2s">FH Wedel · graduating 09/2026</span></div>
         </div>
         <div class="fact">
           <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg></div>
-          <div><b>DE native · EN C1–C2 · ES B1</b><span>Comfortable in international sourcing &amp; sales</span></div>
+          <div><b data-i18n="about.f3b">DE native · EN C1/C2 · ES B1</b><span data-i18n="about.f3s">Comfortable in international sourcing and sales</span></div>
         </div>
         <div class="fact">
           <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg></div>
-          <div><b>Brands built &amp; sold</b><span>Multiple own Amazon FBA brands, some exited</span></div>
+          <div><b data-i18n="about.f4b">Brands built &amp; sold</b><span data-i18n="about.f4s">Several own Amazon FBA brands, some of them sold</span></div>
         </div>
       </aside>
     </div>
@@ -93,22 +99,22 @@
 <!-- ================= EXPERIENCE ================= -->
 <section id="experience">
   <div class="container">
-    <span class="sec-tag reveal">Experience</span>
-    <h2 class="sec-title reveal">Where I've built things.</h2>
-    <p class="sec-lead reveal">Two tracks, one skill set: running my own e-commerce businesses and building them for others.</p>
+    <span class="sec-tag reveal" data-i18n="exp.tag">Experience</span>
+    <h2 class="sec-title reveal" data-i18n="exp.title">What I've been building.</h2>
+    <p class="sec-lead reveal" data-i18n="exp.lead">I run my own e-commerce projects and build them for others. Both sides make each other better.</p>
     <div class="timeline">
       <div class="t-item reveal">
         <div class="t-dot"></div>
         <div class="t-card">
-          <div class="t-when">2022 — Present</div>
-          <h3>Founder &amp; Owner — Private-Label Amazon FBA Brands</h3>
-          <div class="t-org">Self-employed · Online retail</div>
+          <div class="t-when" data-i18n="job1.when">Since 2022</div>
+          <h3 data-i18n="job1.title">Founder &amp; Owner, Private-Label Amazon FBA Brands</h3>
+          <div class="t-org" data-i18n="job1.org">FLXUniversal · Online retail</div>
           <ul>
-            <li>Built and ran multiple own brands on the Amazon marketplace — from product idea to sale; some brands successfully sold</li>
-            <li>Product &amp; market research with Helium 10 to identify profitable niches</li>
-            <li>Supplier sourcing, negotiation and product development, plus logistics to Germany and product quality management</li>
-            <li>Listing creation &amp; optimization and hands-on management of Amazon PPC campaigns</li>
-            <li>Full responsibility for purchasing, margin calculation and accounting</li>
+            <li data-i18n="job1.b1">Built and ran several of my own brands on Amazon, from the first product idea to the finished listing. Some of them I later sold.</li>
+            <li data-i18n="job1.b2">Product and market research with Helium 10 to find profitable niches</li>
+            <li data-i18n="job1.b3">Finding and negotiating with manufacturers, organizing shipping to Germany and keeping an eye on product quality</li>
+            <li data-i18n="job1.b4">Writing and optimizing listings, plus managing the Amazon PPC campaigns</li>
+            <li data-i18n="job1.b5">Purchasing, pricing and bookkeeping land on my desk too</li>
           </ul>
           <div class="t-tags">
             <span class="chip">Amazon FBA</span><span class="chip">Helium 10</span><span class="chip">Sourcing</span><span class="chip">Amazon PPC</span><span class="chip">Logistics</span><span class="chip">Listing SEO</span>
@@ -118,15 +124,15 @@
       <div class="t-item reveal">
         <div class="t-dot"></div>
         <div class="t-card">
-          <div class="t-when">2020 — Present</div>
-          <h3>Freelance E-Commerce &amp; Web Developer</h3>
-          <div class="t-org">Self-employed · Client projects</div>
+          <div class="t-when" data-i18n="job2.when">Since 2020</div>
+          <h3 data-i18n="job2.title">Freelance E-Commerce &amp; Web Developer</h3>
+          <div class="t-org" data-i18n="job2.org">FLXUniversal · Client projects</div>
           <ul>
-            <li>Designed and built websites and online shops for clients — mainly Shopify and WooCommerce, plus custom HTML/CSS/JavaScript</li>
-            <li>Performance marketing across Google Ads, Meta Ads and Microsoft Ads, incl. audience targeting and campaign management</li>
-            <li>Keyword research &amp; SEO to grow organic visibility</li>
-            <li>Web tracking and analytics setups (Google Analytics) to measure and optimize performance</li>
-            <li>Product photography and design work — business cards, restaurant menus, flyers and other marketing materials</li>
+            <li data-i18n="job2.b1">Websites and online shops for clients, mostly Shopify and WooCommerce, plus custom HTML, CSS and JavaScript</li>
+            <li data-i18n="job2.b2">Paid campaigns on Google, Meta and Microsoft Ads, from targeting to day-to-day optimization</li>
+            <li data-i18n="job2.b3">Keyword research and SEO for better organic rankings</li>
+            <li data-i18n="job2.b4">Web tracking and Google Analytics setups, so my clients know what actually works</li>
+            <li data-i18n="job2.b5">Design jobs on the side: business cards, restaurant menus, flyers and more</li>
           </ul>
           <div class="t-tags">
             <span class="chip">Shopify</span><span class="chip">WooCommerce</span><span class="chip">Google Ads</span><span class="chip">Meta Ads</span><span class="chip">Microsoft Ads</span><span class="chip">Google Analytics</span><span class="chip">SEO</span>
@@ -137,16 +143,16 @@
 
     <div class="edu-grid">
       <div class="edu-card reveal">
-        <div class="t-when">2022 — 2026</div>
+        <div class="t-when" data-i18n="edu1.when">2022 to 2026</div>
         <h4>B.Sc. E-Commerce</h4>
-        <div class="t-org">FH Wedel · graduating September 2026</div>
-        <p>Focus: online retail, web development, online marketing, web analytics, e-commerce law. Bachelor thesis: “The Impact of AI Disclosure on Brand Authenticity and Purchase Intention for Experience Products”.</p>
+        <div class="t-org" data-i18n="edu1.org">FH Wedel · graduating September 2026</div>
+        <p data-i18n="edu1.text">Focus areas: online retail, web development, online marketing, web analytics and e-commerce law. My bachelor thesis looks at how labeling content as AI-generated affects brand authenticity and purchase intention.</p>
       </div>
       <div class="edu-card reveal" data-delay="1">
         <div class="t-when">2022</div>
-        <h4>Abitur (German A-levels)</h4>
-        <div class="t-org">Focus: Biology &amp; Chemistry</div>
-        <p>General higher-education entrance qualification with a science focus — the analytical foundation I still use for data-driven decisions today.</p>
+        <h4 data-i18n="edu2.title">Abitur (German A-levels)</h4>
+        <div class="t-org" data-i18n="edu2.org">Focus: Biology &amp; Chemistry</div>
+        <p data-i18n="edu2.text">Finished school with a science focus. The analytical mindset from back then still helps me make data-driven decisions today.</p>
       </div>
     </div>
   </div>
@@ -155,50 +161,50 @@
 <!-- ================= SKILLS ================= -->
 <section id="skills">
   <div class="container">
-    <span class="sec-tag reveal">Skills</span>
-    <h2 class="sec-title reveal">What I bring to the table.</h2>
-    <p class="sec-lead reveal">The full e-commerce stack — from finding a product to selling it profitably online.</p>
+    <span class="sec-tag reveal" data-i18n="skills.tag">Skills</span>
+    <h2 class="sec-title reveal" data-i18n="skills.title">What I bring to the table.</h2>
+    <p class="sec-lead reveal" data-i18n="skills.lead">Everything it takes to sell online, from finding a product to making it profitable.</p>
     <div class="skills-grid">
       <div class="skill-card reveal">
         <div class="skill-head">
           <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></div>
-          <h3>E-Commerce &amp; Marketplaces</h3>
+          <h3 data-i18n="sk1.title">E-Commerce &amp; Marketplaces</h3>
         </div>
-        <div class="bar-row"><div class="bar-label"><span>Amazon FBA &amp; Marketplace Management</span><span>Expert</span></div><div class="bar"><i data-w="95"></i></div></div>
-        <div class="bar-row"><div class="bar-label"><span>Product &amp; Market Research (Helium 10)</span><span>Expert</span></div><div class="bar"><i data-w="92"></i></div></div>
-        <div class="bar-row"><div class="bar-label"><span>Sourcing, Logistics &amp; Quality</span><span>Advanced</span></div><div class="bar"><i data-w="88"></i></div></div>
-        <div class="bar-row"><div class="bar-label"><span>Listing Optimization</span><span>Expert</span></div><div class="bar"><i data-w="93"></i></div></div>
+        <div class="bar-row"><div class="bar-label"><span data-i18n="sk1.l1">Amazon FBA &amp; Marketplace Management</span><span data-i18n="lvl.expert">Expert</span></div><div class="bar"><i data-w="95"></i></div></div>
+        <div class="bar-row"><div class="bar-label"><span data-i18n="sk1.l2">Product &amp; Market Research (Helium 10)</span><span data-i18n="lvl.expert">Expert</span></div><div class="bar"><i data-w="92"></i></div></div>
+        <div class="bar-row"><div class="bar-label"><span data-i18n="sk1.l3">Sourcing, Logistics &amp; Quality</span><span data-i18n="lvl.advanced">Advanced</span></div><div class="bar"><i data-w="88"></i></div></div>
+        <div class="bar-row"><div class="bar-label"><span data-i18n="sk1.l4">Listing Optimization</span><span data-i18n="lvl.expert">Expert</span></div><div class="bar"><i data-w="93"></i></div></div>
       </div>
       <div class="skill-card reveal" data-delay="1">
         <div class="skill-head">
           <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 21 3l-8 18-2.5-7.5L3 11z"/></svg></div>
-          <h3>Online Marketing</h3>
+          <h3 data-i18n="sk2.title">Online Marketing</h3>
         </div>
-        <div class="bar-row"><div class="bar-label"><span>Google Ads &amp; Amazon PPC</span><span>Expert</span></div><div class="bar"><i data-w="92"></i></div></div>
-        <div class="bar-row"><div class="bar-label"><span>Meta &amp; Microsoft Ads</span><span>Advanced</span></div><div class="bar"><i data-w="86"></i></div></div>
-        <div class="bar-row"><div class="bar-label"><span>SEO &amp; Keyword Research</span><span>Advanced</span></div><div class="bar"><i data-w="85"></i></div></div>
-        <div class="bar-row"><div class="bar-label"><span>Social Media &amp; Newsletter</span><span>Advanced</span></div><div class="bar"><i data-w="80"></i></div></div>
+        <div class="bar-row"><div class="bar-label"><span>Google Ads &amp; Amazon PPC</span><span data-i18n="lvl.expert">Expert</span></div><div class="bar"><i data-w="92"></i></div></div>
+        <div class="bar-row"><div class="bar-label"><span>Meta &amp; Microsoft Ads</span><span data-i18n="lvl.advanced">Advanced</span></div><div class="bar"><i data-w="86"></i></div></div>
+        <div class="bar-row"><div class="bar-label"><span data-i18n="sk2.l3">SEO &amp; Keyword Research</span><span data-i18n="lvl.advanced">Advanced</span></div><div class="bar"><i data-w="85"></i></div></div>
+        <div class="bar-row"><div class="bar-label"><span>Social Media &amp; Newsletter</span><span data-i18n="lvl.advanced">Advanced</span></div><div class="bar"><i data-w="80"></i></div></div>
       </div>
       <div class="skill-card reveal" data-delay="1">
         <div class="skill-head">
           <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg></div>
-          <h3>Web Development</h3>
+          <h3 data-i18n="sk3.title">Web Development</h3>
         </div>
-        <div class="bar-row"><div class="bar-label"><span>Shopify &amp; WooCommerce</span><span>Expert</span></div><div class="bar"><i data-w="93"></i></div></div>
-        <div class="bar-row"><div class="bar-label"><span>HTML &amp; CSS</span><span>Advanced</span></div><div class="bar"><i data-w="90"></i></div></div>
-        <div class="bar-row"><div class="bar-label"><span>JavaScript</span><span>Advanced</span></div><div class="bar"><i data-w="82"></i></div></div>
+        <div class="bar-row"><div class="bar-label"><span>Shopify &amp; WooCommerce</span><span data-i18n="lvl.expert">Expert</span></div><div class="bar"><i data-w="93"></i></div></div>
+        <div class="bar-row"><div class="bar-label"><span>HTML &amp; CSS</span><span data-i18n="lvl.advanced">Advanced</span></div><div class="bar"><i data-w="90"></i></div></div>
+        <div class="bar-row"><div class="bar-label"><span>JavaScript</span><span data-i18n="lvl.advanced">Advanced</span></div><div class="bar"><i data-w="82"></i></div></div>
         <div class="skill-chips">
-          <span class="chip">Responsive Design</span><span class="chip">Conversion Optimization</span><span class="chip">Shop Setup</span>
+          <span class="chip">Responsive Design</span><span class="chip" data-i18n="sk3.c2">Conversion Optimization</span><span class="chip" data-i18n="sk3.c3">Shop Setup</span>
         </div>
       </div>
       <div class="skill-card reveal" data-delay="2">
         <div class="skill-head">
           <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
-          <h3>Data &amp; Analytics</h3>
+          <h3 data-i18n="sk4.title">Data &amp; Analytics</h3>
         </div>
-        <div class="bar-row"><div class="bar-label"><span>Google Analytics &amp; Web Tracking</span><span>Advanced</span></div><div class="bar"><i data-w="88"></i></div></div>
-        <div class="bar-row"><div class="bar-label"><span>Python</span><span>Working</span></div><div class="bar"><i data-w="72"></i></div></div>
-        <div class="bar-row"><div class="bar-label"><span>MySQL &amp; R</span><span>Working</span></div><div class="bar"><i data-w="70"></i></div></div>
+        <div class="bar-row"><div class="bar-label"><span data-i18n="sk4.l1">Google Analytics &amp; Web Tracking</span><span data-i18n="lvl.advanced">Advanced</span></div><div class="bar"><i data-w="88"></i></div></div>
+        <div class="bar-row"><div class="bar-label"><span>Python</span><span data-i18n="lvl.working">Solid basics</span></div><div class="bar"><i data-w="72"></i></div></div>
+        <div class="bar-row"><div class="bar-label"><span>MySQL &amp; R</span><span data-i18n="lvl.working">Solid basics</span></div><div class="bar"><i data-w="70"></i></div></div>
         <div class="skill-chips">
           <span class="chip">Microsoft Office</span><span class="chip">Affinity Photo</span><span class="chip">Solid Edge</span><span class="chip">KeyShot</span><span class="chip">DaVinci Resolve</span>
         </div>
@@ -210,52 +216,52 @@
 <!-- ================= WORK ================= -->
 <section id="work">
   <div class="container">
-    <span class="sec-tag reveal">What I do</span>
-    <h2 class="sec-title reveal">Projects &amp; services.</h2>
-    <p class="sec-lead reveal">A snapshot of the work I do — for my own brands and for clients.</p>
+    <span class="sec-tag reveal" data-i18n="work.tag">What I do</span>
+    <h2 class="sec-title reveal" data-i18n="work.title">Projects &amp; services.</h2>
+    <p class="sec-lead reveal" data-i18n="work.lead">A snapshot of my work, for my own brands and for clients.</p>
     <div class="work-grid">
       <div class="work-card reveal">
         <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></div>
-        <h3>Private-Label Amazon Brands</h3>
-        <p>Multiple own brands built from zero: niche research, product development with manufacturers, imports to Germany, quality control, listings and PPC. Several brands successfully sold.</p>
+        <h3 data-i18n="w1.title">Private-Label Amazon Brands</h3>
+        <p data-i18n="w1.text">Several of my own brands built from zero: niche research, product development with manufacturers, imports to Germany, quality control, listings and PPC. Some of them I've sold on.</p>
         <div class="t-tags"><span class="chip">Amazon FBA</span><span class="chip">Helium 10</span><span class="chip">Exits</span></div>
       </div>
       <div class="work-card reveal" data-delay="1">
         <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-        <h3>Online Shops for Clients</h3>
-        <p>Conversion-focused Shopify and WooCommerce stores, built end-to-end: structure, design, product setup, payments and launch — plus custom websites in HTML, CSS and JavaScript.</p>
+        <h3 data-i18n="w2.title">Online Shops for Clients</h3>
+        <p data-i18n="w2.text">Conversion-focused Shopify and WooCommerce stores, built end to end: structure, design, product setup, payments and launch. Custom websites in HTML, CSS and JavaScript included.</p>
         <div class="t-tags"><span class="chip">Shopify</span><span class="chip">WooCommerce</span><span class="chip">HTML/CSS/JS</span></div>
       </div>
       <div class="work-card reveal" data-delay="2">
         <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg></div>
-        <h3>Performance Marketing</h3>
-        <p>Paid campaigns across Google, Meta and Microsoft Ads — from audience strategy and creatives to daily optimization and reporting, tied to real revenue targets.</p>
+        <h3 data-i18n="w3.title">Performance Marketing</h3>
+        <p data-i18n="w3.text">Paid campaigns on Google, Meta and Microsoft Ads: audience strategy, creatives, daily optimization and reporting. Always tied to real revenue targets.</p>
         <div class="t-tags"><span class="chip">Google Ads</span><span class="chip">Meta Ads</span><span class="chip">Microsoft Ads</span></div>
       </div>
       <div class="work-card reveal">
         <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-        <h3>SEO, Tracking &amp; Analytics</h3>
-        <p>Keyword research and on-page SEO for organic growth, plus clean Google Analytics and web-tracking setups so every marketing euro is measurable.</p>
+        <h3 data-i18n="w4.title">SEO, Tracking &amp; Analytics</h3>
+        <p data-i18n="w4.text">Keyword research and on-page SEO for organic growth, plus clean Google Analytics and tracking setups. That way every marketing euro is measurable.</p>
         <div class="t-tags"><span class="chip">SEO</span><span class="chip">Google Analytics</span><span class="chip">Web Tracking</span></div>
       </div>
       <div class="work-card reveal" data-delay="1">
         <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></div>
-        <h3>Product Photography</h3>
-        <p>Product photos and visuals for Amazon listings and online shops — shot, edited and optimized to convert, including 3D renders where it makes sense.</p>
+        <h3 data-i18n="w5.title">Product Photography</h3>
+        <p data-i18n="w5.text">Product photos and visuals for Amazon listings and online shops: shot, edited and optimized to convert. 3D renders included where they make sense.</p>
         <div class="t-tags"><span class="chip">Affinity Photo</span><span class="chip">KeyShot</span><span class="chip">Listing Images</span></div>
       </div>
       <div class="work-card reveal" data-delay="2">
         <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
-        <h3>Brand &amp; Print Design</h3>
-        <p>Design work for clients beyond the web: business cards, restaurant menus, flyers and marketing materials that match the brand across every touchpoint.</p>
+        <h3 data-i18n="w6.title">Brand &amp; Print Design</h3>
+        <p data-i18n="w6.text">Design work beyond the web: business cards, restaurant menus, flyers and marketing materials that match the brand at every touchpoint.</p>
         <div class="t-tags"><span class="chip">Design</span><span class="chip">Print</span><span class="chip">Branding</span></div>
       </div>
     </div>
 
     <div class="lang-strip">
-      <div class="lang-card reveal"><b>German</b><span>Native</span></div>
-      <div class="lang-card reveal" data-delay="1"><b>English</b><span>Business fluent · C1–C2</span></div>
-      <div class="lang-card reveal" data-delay="2"><b>Spanish</b><span>Basic · B1</span></div>
+      <div class="lang-card reveal"><b data-i18n="lang1.name">German</b><span data-i18n="lang1.lvl">Native</span></div>
+      <div class="lang-card reveal" data-delay="1"><b data-i18n="lang2.name">English</b><span data-i18n="lang2.lvl">Business fluent · C1/C2</span></div>
+      <div class="lang-card reveal" data-delay="2"><b data-i18n="lang3.name">Spanish</b><span data-i18n="lang3.lvl">Basic · B1</span></div>
     </div>
   </div>
 </section>
@@ -264,26 +270,26 @@
 <section id="contact">
   <div class="container">
     <div class="contact-wrap reveal">
-      <span class="sec-tag">Contact</span>
-      <h2>Let's build something<br>that sells.</h2>
-      <p>Whether it's a new shop, a marketing campaign or an Amazon project — I'm happy to hear about it. I usually reply within 24 hours.</p>
-      <!-- PLATZHALTER: E-Mail & Telefon — vor dem Livegang echte Daten eintragen
-           (jeweils im href UND im sichtbaren <b>-Text) -->
+      <span class="sec-tag" data-i18n="contact.tag">Contact</span>
+      <h2 data-i18n="contact.title">Let's build something<br>that sells.</h2>
+      <p data-i18n="contact.text">Whether it's a new shop, a marketing campaign or an Amazon project: tell me about it. I usually reply within 24 hours.</p>
+      <!-- PLATZHALTER: E-Mail & Telefon. Vor dem Livegang echte Daten eintragen,
+           jeweils im href UND im sichtbaren <b>-Text. -->
       <div class="contact-cards">
         <a class="c-card" href="mailto:your.email@example.com">
           <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
-          <div><span>Email</span><b>your.email@example.com</b></div>
+          <div><span data-i18n="contact.emailLabel">Email</span><b>your.email@example.com</b></div>
         </a>
         <a class="c-card" href="tel:+491234567890">
           <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
-          <div><span>Phone</span><b>+49 123 4567890</b></div>
+          <div><span data-i18n="contact.phoneLabel">Phone</span><b>+49 123 4567890</b></div>
         </a>
         <div class="c-card">
           <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
-          <div><span>Based in</span><b>Wedel / Hamburg, Germany</b></div>
+          <div><span data-i18n="contact.locLabel">Based in</span><b data-i18n="contact.loc">Wedel / Hamburg, Germany</b></div>
         </div>
       </div>
-      <a href="mailto:your.email@example.com" class="btn btn-primary">Send me an email
+      <a href="mailto:your.email@example.com" class="btn btn-primary"><span data-i18n="contact.btn">Send me an email</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
@@ -292,8 +298,8 @@
 
 <footer>
   <div class="container">
-    <span class="logo">Felix<span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">.B</span></span>
-    <p>© <span id="year"></span> Felix Bettenworth · E-Commerce &amp; Web Development · Wedel, Germany</p>
+    <span class="logo">Flx<span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">.357</span></span>
+    <p>© <span id="year"></span> <span data-i18n="footer.text">FLXUniversal · Felix Bettenworth · Wedel, Germany</span></p>
   </div>
 </footer>
 

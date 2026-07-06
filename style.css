@@ -1,13 +1,13 @@
 /* ==========================================================================
-   Felix Bettenworth — Portfolio
+   FLXUniversal â€” Felix Bettenworth, Portfolio
    style.css
    --------------------------------------------------------------------------
    Aufbau der Datei:
-   1.  Variablen & Grundgerüst
+   1.  Variablen & GrundgerÃ¼st
    2.  Scroll-Fortschrittsbalken
-   3.  Navigation
+   3.  Navigation (inkl. Sprachumschalter)
    4.  Hero (Startbereich)
-   5.  Section-Überschriften (wiederverwendet)
+   5.  Section-Ãœberschriften (wiederverwendet)
    6.  About
    7.  Experience (Timeline)
    8.  Education (Ausbildung)
@@ -23,38 +23,38 @@
 
 
 /* --------------------------------------------------------------------------
-   1. Variablen & Grundgerüst
+   1. Variablen & GrundgerÃ¼st
    Alle Farben und Grundwerte liegen zentral in :root.
-   Wer das Farbschema ändern will, muss nur hier anfassen.
+   Wer das Farbschema Ã¤ndern will, muss nur hier anfassen.
    -------------------------------------------------------------------------- */
 
 :root {
-  /* Hintergründe */
+  /* HintergrÃ¼nde */
   --bg: #060a12;                        /* Seitenhintergrund, fast schwarz */
   --bg-soft: #0b1220;                   /* etwas helleres Dunkelblau */
 
-  /* Kartenflächen und Ränder (halbtransparentes Weiß) */
+  /* KartenflÃ¤chen und RÃ¤nder (halbtransparentes WeiÃŸ) */
   --surface: rgba(255, 255, 255, .04);
   --surface-strong: rgba(255, 255, 255, .07);
   --border: rgba(255, 255, 255, .09);
 
   /* Textfarben */
   --text: #e8eef7;                      /* Haupttext, helles Grau-Blau */
-  --muted: #94a3b8;                     /* Nebentext, gedämpft */
+  --muted: #94a3b8;                     /* Nebentext, gedÃ¤mpft */
 
   /* Akzentfarben */
   --accent: #38bdf8;                    /* Himmelblau */
   --accent-2: #818cf8;                  /* Violett */
-  --accent-3: #2dd4bf;                  /* Türkis */
+  --accent-3: #2dd4bf;                  /* TÃ¼rkis */
   --grad: linear-gradient(120deg, #38bdf8, #818cf8 55%, #2dd4bf);
 
   /* Sonstiges */
   --radius: 18px;                                /* Standard-Eckenrundung */
-  --font-head: "Space Grotesk", sans-serif;      /* Überschriften */
-  --font-body: "Inter", sans-serif;              /* Fließtext */
+  --font-head: "Space Grotesk", sans-serif;      /* Ãœberschriften */
+  --font-body: "Inter", sans-serif;              /* FlieÃŸtext */
 }
 
-/* Reset: Browser-Standardabstände entfernen */
+/* Reset: Browser-StandardabstÃ¤nde entfernen */
 * {
   margin: 0;
   padding: 0;
@@ -63,7 +63,7 @@
 
 html {
   scroll-behavior: smooth;      /* sanftes Scrollen bei Anker-Links */
-  scroll-padding-top: 90px;     /* Platz für die fixe Navigation beim Anspringen */
+  scroll-padding-top: 90px;     /* Platz fÃ¼r die fixe Navigation beim Anspringen */
 }
 
 body {
@@ -109,7 +109,7 @@ section {
 
 /* --------------------------------------------------------------------------
    2. Scroll-Fortschrittsbalken
-   Dünner Balken ganz oben. Die Breite setzt script.js beim Scrollen.
+   DÃ¼nner Balken ganz oben. Die Breite setzt script.js beim Scrollen.
    -------------------------------------------------------------------------- */
 
 #progress {
@@ -155,7 +155,7 @@ nav.scrolled {
   justify-content: space-between;
 }
 
-/* Logo "Felix.B" — das ".B" bekommt den Farbverlauf */
+/* Logo "Flx.357" â€” das ".357" bekommt den Farbverlauf */
 .logo {
   font-family: var(--font-head);
   font-weight: 700;
@@ -168,6 +168,13 @@ nav.scrolled {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* Rechte Seite der Nav: MenÃ¼, Sprachbutton, Burger */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
 .nav-links {
@@ -185,7 +192,7 @@ nav.scrolled {
   transition: color .25s;
 }
 
-/* Unterstrich, der bei Hover / aktivem Abschnitt von links reinwächst */
+/* Unterstrich, der bei Hover / aktivem Abschnitt von links reinwÃ¤chst */
 .nav-links a::after {
   content: "";
   position: absolute;
@@ -208,7 +215,7 @@ nav.scrolled {
   width: 100%;
 }
 
-/* "Get in touch"-Button rechts in der Navigation */
+/* "Get in touch"-Button in der Navigation */
 .nav-cta {
   border: 1px solid var(--border);
   padding: 9px 20px;
@@ -227,8 +234,29 @@ nav.scrolled {
   display: none;    /* der Button braucht keinen Unterstrich */
 }
 
-/* Burger-Menü: nur auf dem Handy sichtbar (siehe Abschnitt 16).
-   Die drei <span> sind die Striche — mit .open werden sie zum X gedreht. */
+/* Sprachumschalter DE/EN. Der Button zeigt immer die Sprache an,
+   zu der man wechseln KANN (auf der englischen Seite steht "DE"). */
+#langToggle {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color .25s, background .25s;
+}
+
+#langToggle:hover {
+  border-color: var(--accent);
+  background: rgba(56, 189, 248, .1);
+}
+
+/* Burger-MenÃ¼: nur auf dem Handy sichtbar (siehe Abschnitt 16).
+   Die drei <span> sind die Striche â€” mit .open werden sie zum X gedreht. */
 #burger {
   display: none;
   background: none;
@@ -267,7 +295,7 @@ nav.scrolled {
   overflow: hidden;
 }
 
-/* Zeichenfläche für das Partikel-Netzwerk (füllt den ganzen Hero) */
+/* ZeichenflÃ¤che fÃ¼r das Partikel-Netzwerk (fÃ¼llt den ganzen Hero) */
 #particles {
   position: absolute;
   inset: 0;
@@ -307,8 +335,8 @@ nav.scrolled {
   50%      { transform: translateY(40px) scale(1.06); }
 }
 
-/* Dezentes Gitternetz — reines CSS aus zwei Verlaufslinien.
-   Die mask-image blendet es zu den Rändern hin aus. */
+/* Dezentes Gitternetz â€” reines CSS aus zwei Verlaufslinien.
+   Die mask-image blendet es zu den RÃ¤ndern hin aus. */
 .hero-grid {
   position: absolute;
   inset: 0;
@@ -326,7 +354,7 @@ nav.scrolled {
   max-width: 820px;
 }
 
-/* Kleines "Available"-Badge mit pulsierendem grünem Punkt */
+/* Kleines "Available"-Badge mit pulsierendem grÃ¼nem Punkt */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -354,7 +382,7 @@ nav.scrolled {
   100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
 }
 
-/* Große Überschrift — clamp() skaliert die Schrift mit der Fensterbreite */
+/* GroÃŸe Ãœberschrift â€” clamp() skaliert die Schrift mit der Fensterbreite */
 #hero h1 {
   font-size: clamp(2.6rem, 6.5vw, 4.6rem);
   font-weight: 700;
@@ -448,7 +476,7 @@ nav.scrolled {
 }
 
 /* Zahlen-Leiste unter den Buttons (6+ Jahre, 4+ Jahre, 3 Sprachen).
-   Die Zahlen zählt script.js hoch, sobald sie sichtbar werden. */
+   Die Zahlen zÃ¤hlt script.js hoch, sobald sie sichtbar werden. */
 .hero-stats {
   display: flex;
   gap: 0;
@@ -489,7 +517,7 @@ nav.scrolled {
 
 
 /* --------------------------------------------------------------------------
-   5. Section-Überschriften
+   5. Section-Ãœberschriften
    Jede Section nutzt dasselbe Muster: kleines Label, Titel, Einleitung.
    -------------------------------------------------------------------------- */
 
@@ -636,7 +664,7 @@ nav.scrolled {
   padding-bottom: 0;
 }
 
-/* Punkt auf der Linie (Ring, der Kern kommt über ::after) */
+/* Punkt auf der Linie (Ring, der Kern kommt Ã¼ber ::after) */
 .t-dot {
   position: absolute;
   left: 8px;
@@ -667,7 +695,7 @@ nav.scrolled {
   transition: transform .3s, border-color .3s, background .3s;
 }
 
-/* Karte rückt bei Hover leicht nach rechts */
+/* Karte rÃ¼ckt bei Hover leicht nach rechts */
 .t-card:hover {
   transform: translateX(6px);
   border-color: rgba(56, 189, 248, .4);
@@ -698,7 +726,7 @@ nav.scrolled {
   list-style: none;
 }
 
-/* Aufzählungspunkte mit eigenem Pfeil-Symbol statt Standard-Bullet */
+/* AufzÃ¤hlungspunkte mit eigenem Pfeil-Symbol statt Standard-Bullet */
 .t-card li {
   color: var(--muted);
   font-size: .95rem;
@@ -707,7 +735,7 @@ nav.scrolled {
 }
 
 .t-card li::before {
-  content: "▹";
+  content: "â–¹";
   position: absolute;
   left: 0;
   color: var(--accent-3);
@@ -801,7 +829,7 @@ nav.scrolled {
   transition: transform .3s, border-color .3s;
 }
 
-/* Lichtschein-Overlay (unsichtbar, bis die Maus über der Karte ist) */
+/* Lichtschein-Overlay (unsichtbar, bis die Maus Ã¼ber der Karte ist) */
 .skill-card::after {
   content: "";
   position: absolute;
@@ -850,8 +878,8 @@ nav.scrolled {
 
 /* Skill-Balken: Beschriftung + Balken.
    Der innere <i>-Balken startet bei width: 0. script.js setzt ihn auf
-   seinen Zielwert (data-w), sobald er ins Bild scrollt — die transition
-   hier sorgt dann für die Füll-Animation. */
+   seinen Zielwert (data-w), sobald er ins Bild scrollt â€” die transition
+   hier sorgt dann fÃ¼r die FÃ¼ll-Animation. */
 .bar-row {
   margin-bottom: 15px;
 }
@@ -895,7 +923,7 @@ nav.scrolled {
 /* --------------------------------------------------------------------------
    10. Work (Projekte & Services)
    Sechs Karten im 3er-Raster. Bei Hover hebt sich die Karte an
-   und oben wächst eine Farblinie von links rein (::before).
+   und oben wÃ¤chst eine Farblinie von links rein (::before).
    -------------------------------------------------------------------------- */
 
 #work {
@@ -964,7 +992,7 @@ nav.scrolled {
 .work-card p {
   color: var(--muted);
   font-size: .93rem;
-  flex: 1;    /* drückt die Chips ans untere Kartenende */
+  flex: 1;    /* drÃ¼ckt die Chips ans untere Kartenende */
 }
 
 .work-card .t-tags {
@@ -1007,7 +1035,7 @@ nav.scrolled {
 
 /* --------------------------------------------------------------------------
    12. Kontakt
-   Eine große Karte mit E-Mail, Telefon und Standort.
+   Eine groÃŸe Karte mit E-Mail, Telefon und Standort.
    -------------------------------------------------------------------------- */
 
 .contact-wrap {
@@ -1101,7 +1129,7 @@ footer .logo {
 /* --------------------------------------------------------------------------
    14. Scroll-Animationen (Reveal)
    Alles mit der Klasse .reveal startet unsichtbar und leicht nach unten
-   verschoben. script.js hängt .visible an, sobald das Element ins
+   verschoben. script.js hÃ¤ngt .visible an, sobald das Element ins
    Sichtfeld scrollt -> es blendet sanft ein.
    data-delay="1" bis "3" staffelt benachbarte Elemente zeitlich.
    -------------------------------------------------------------------------- */
@@ -1175,9 +1203,10 @@ footer .logo {
   }
 }
 
-/* Handy: Burger-Menü aktiv, alles einspaltig */
+/* Handy: Burger-MenÃ¼ aktiv, alles einspaltig.
+   Der Sprachbutton bleibt neben dem Burger immer sichtbar. */
 @media (max-width: 640px) {
-  /* Menü wird zum Vollbild-Overlay, das von rechts reinfährt */
+  /* MenÃ¼ wird zum Vollbild-Overlay, das von rechts reinfÃ¤hrt */
   .nav-links {
     position: fixed;
     inset: 0;
@@ -1201,6 +1230,10 @@ footer .logo {
 
   #burger {
     display: block;
+  }
+
+  .nav-right {
+    gap: 12px;
   }
 
   .work-grid {
