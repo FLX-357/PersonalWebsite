@@ -178,7 +178,7 @@ nav {
 
 .nav-links {
   display: flex;
-  gap: 34px;
+  gap: 28px;
   list-style: none;
   align-items: center;
 }
@@ -1115,16 +1115,18 @@ footer .logo {
 
 /* --------------------------------------------------------------------------
    13b. Cookie-Banner
-   Liegt fix unten in der Mitte. Startet unsichtbar und leicht abgesenkt;
-   script.js entfernt das hidden-Attribut und hängt .show an,
-   dann gleitet das Banner sanft nach oben ins Bild.
+   Liegt fix ÜBER dem Nav-Dock (bottom: 100px), damit es dessen Klicks
+   nicht blockiert. Startet unsichtbar und ohne Klickfläche
+   (pointer-events: none); script.js entfernt das hidden-Attribut und
+   hängt .show an, dann gleitet das Banner sanft ins Bild und wird klickbar.
    -------------------------------------------------------------------------- */
 
 .cookie-banner {
   position: fixed;
   left: 24px;
   right: 24px;
-  bottom: 24px;
+  bottom: 100px;          /* über dem Nav-Dock, damit es keine Klicks blockiert */
+  pointer-events: none;   /* solange unsichtbar: Klicks gehen durch */
   max-width: 620px;
   margin: 0 auto;
   z-index: 1100;
@@ -1145,6 +1147,7 @@ footer .logo {
 .cookie-banner.show {
   opacity: 1;
   transform: none;
+  pointer-events: auto;   /* erst wenn sichtbar, ist es auch klickbar */
 }
 
 .cookie-text b {
@@ -1339,9 +1342,14 @@ footer .logo {
     font-size: 1.25rem;
   }
 
-  /* Nav oben statt unten: der Footer braucht den Extra-Platz nicht mehr */
+  /* Nav oben statt unten: der Footer braucht den Extra-Platz nicht mehr
+     und das Cookie-Banner darf wieder ganz nach unten */
   footer {
     padding: 34px 0;
+  }
+
+  .cookie-banner {
+    bottom: 24px;
   }
 }
 
