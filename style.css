@@ -5,17 +5,18 @@
    Aufbau der Datei:
    1.  Variablen & Grundgerüst
    2.  Scroll-Fortschrittsbalken
-   3.  Navigation (inkl. Sprachumschalter)
+   3.  Navigation (Desktop: Dock unten / Mobil: Leiste oben)
    4.  Hero (Startbereich)
    5.  Section-Überschriften (wiederverwendet)
+   5b. Hintergrund-Glows
    6.  About
    7.  Timeline (Werdegang)
-   8.  Insights (Bachelorarbeit)
+   8.  Insights (Bachelorarbeit) & Why me
    9.  Skills
    10. Work (Projekte & Services)
    11. Sprachen
    12. Kontakt
-   13. Footer
+   13. Footer & Cookie-Banner
    14. Scroll-Animationen (Reveal)
    15. Reduzierte Bewegung (Barrierefreiheit)
    16. Responsive (Tablet & Handy)
@@ -127,13 +128,11 @@ section {
 
 /* --------------------------------------------------------------------------
    3. Navigation
-   Fix am oberen Rand. Bekommt per JS die Klasse .scrolled,
-   sobald man nach unten scrollt -> dann dunkler Glas-Effekt.
+   Desktop: schwebendes Dock am unteren Bildschirmrand.
+   Auf kleineren Bildschirmen (Abschnitt 16) wird die Nav wieder
+   zur klassischen Leiste oben mit Burger-Menü.
    -------------------------------------------------------------------------- */
 
-/* Desktop: schwebendes Dock am unteren Bildschirmrand.
-   Auf kleineren Bildschirmen (Abschnitt 16) wird die Nav wieder
-   zur klassischen Leiste oben mit Burger-Menü. */
 nav {
   position: fixed;
   bottom: 22px;
@@ -184,11 +183,16 @@ nav {
   align-items: center;
 }
 
+.nav-links li {
+  flex: none;    /* Menüpunkte dürfen im Dock nicht zusammengequetscht werden */
+}
+
 .nav-links a {
   font-size: .92rem;
   color: var(--muted);
   font-weight: 500;
   position: relative;
+  white-space: nowrap;    /* verhindert Umbrüche bei längeren Wörtern ("Über mich") */
   transition: color .25s;
 }
 
@@ -255,7 +259,7 @@ nav {
   background: rgba(56, 189, 248, .1);
 }
 
-/* Burger-Menü: nur auf dem Handy sichtbar (siehe Abschnitt 16).
+/* Burger-Menü: nur auf kleineren Bildschirmen sichtbar (Abschnitt 16).
    Die drei <span> sind die Striche — mit .open werden sie zum X gedreht. */
 #burger {
   display: none;
@@ -742,7 +746,7 @@ section > .container {
   font-size: .98rem;
 }
 
-/* Kleine Schlagwort-Chips (werden auch bei Skills & Work genutzt) */
+/* Kleine Schlagwort-Chips (werden überall wiederverwendet) */
 .t-tags {
   display: flex;
   flex-wrap: wrap;
@@ -762,8 +766,9 @@ section > .container {
 
 
 /* --------------------------------------------------------------------------
-   8. Insights (Bachelorarbeit)
-   Drei kompakte Karten: Frage, Relevanz, Fazit.
+   8. Insights (Bachelorarbeit) & Why me
+   Insights: drei kompakte Karten (Frage, Relevanz, Fazit).
+   Why me: dieselben Karten im 2x2-Raster, mit großer Nummer.
    -------------------------------------------------------------------------- */
 
 .insight-grid {
@@ -819,7 +824,7 @@ section > .container {
 
 /* --------------------------------------------------------------------------
    9. Skills
-   Vier Karten im 2x2-Raster mit animierten Balken.
+   Vier Karten im 2x2-Raster mit gruppierten Chips.
    Der Lichtschein, der dem Mauszeiger folgt, funktioniert so:
    script.js schreibt die Mausposition in die Variablen --mx / --my,
    und das ::after-Overlay legt an genau diese Stelle einen radialen Verlauf.
@@ -1017,7 +1022,7 @@ section > .container {
 
 /* --------------------------------------------------------------------------
    12. Kontakt
-   Eine große Karte mit E-Mail, Telefon und Standort.
+   Eine große Karte mit E-Mail und Standort.
    -------------------------------------------------------------------------- */
 
 .contact-wrap {

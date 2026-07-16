@@ -285,10 +285,12 @@
 
   /* ------------------------------------------------------------------------
      3. Navigation
-     - ab 40px Scrolltiefe bekommt die Nav die Klasse .scrolled (Glas-Optik)
+     - beim Scrollen bekommt die Nav die Klasse .scrolled
+       (Glas-Optik für die Top-Bar auf Tablet/Handy)
      - der Balken oben zeigt an, wie weit man auf der Seite ist
      - der Menüpunkt der Section, in der man sich befindet, wird markiert
-     - Burger-Button öffnet/schließt das Menü auf dem Handy
+     - Burger-Button öffnet/schließt das Menü auf dem Handy und sperrt
+       dabei die Seite dahinter (body.menu-open)
      ------------------------------------------------------------------------ */
 
   const nav = document.getElementById("nav");
