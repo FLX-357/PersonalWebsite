@@ -1,13 +1,13 @@
 /* ==========================================================================
-   FLXUniversal â€” Felix Bettenworth, Portfolio
+   FLXUniversal — Felix Bettenworth, Portfolio
    style.css
    --------------------------------------------------------------------------
    Aufbau der Datei:
-   1.  Variablen & GrundgerÃ¼st
+   1.  Variablen & Grundgerüst
    2.  Scroll-Fortschrittsbalken
    3.  Navigation (inkl. Sprachumschalter)
    4.  Hero (Startbereich)
-   5.  Section-Ãœberschriften (wiederverwendet)
+   5.  Section-Überschriften (wiederverwendet)
    6.  About
    7.  Timeline (Werdegang)
    8.  Insights (Bachelorarbeit)
@@ -23,38 +23,38 @@
 
 
 /* --------------------------------------------------------------------------
-   1. Variablen & GrundgerÃ¼st
+   1. Variablen & Grundgerüst
    Alle Farben und Grundwerte liegen zentral in :root.
-   Wer das Farbschema Ã¤ndern will, muss nur hier anfassen.
+   Wer das Farbschema ändern will, muss nur hier anfassen.
    -------------------------------------------------------------------------- */
 
 :root {
-  /* HintergrÃ¼nde */
+  /* Hintergründe */
   --bg: #060a12;                        /* Seitenhintergrund, fast schwarz */
   --bg-soft: #0b1220;                   /* etwas helleres Dunkelblau */
 
-  /* KartenflÃ¤chen und RÃ¤nder (halbtransparentes WeiÃŸ) */
+  /* Kartenflächen und Ränder (halbtransparentes Weiß) */
   --surface: rgba(255, 255, 255, .04);
   --surface-strong: rgba(255, 255, 255, .07);
   --border: rgba(255, 255, 255, .09);
 
   /* Textfarben */
   --text: #e8eef7;                      /* Haupttext, helles Grau-Blau */
-  --muted: #94a3b8;                     /* Nebentext, gedÃ¤mpft */
+  --muted: #94a3b8;                     /* Nebentext, gedämpft */
 
   /* Akzentfarben */
   --accent: #38bdf8;                    /* Himmelblau */
   --accent-2: #818cf8;                  /* Violett */
-  --accent-3: #2dd4bf;                  /* TÃ¼rkis */
+  --accent-3: #2dd4bf;                  /* Türkis */
   --grad: linear-gradient(120deg, #38bdf8, #818cf8 55%, #2dd4bf);
 
   /* Sonstiges */
   --radius: 18px;                                /* Standard-Eckenrundung */
-  --font-head: "Space Grotesk", sans-serif;      /* Ãœberschriften */
-  --font-body: "Inter", sans-serif;              /* FlieÃŸtext */
+  --font-head: "Space Grotesk", sans-serif;      /* Überschriften */
+  --font-body: "Inter", sans-serif;              /* Fließtext */
 }
 
-/* Reset: Browser-StandardabstÃ¤nde entfernen */
+/* Reset: Browser-Standardabstände entfernen */
 * {
   margin: 0;
   padding: 0;
@@ -63,7 +63,8 @@
 
 html {
   scroll-behavior: smooth;      /* sanftes Scrollen bei Anker-Links */
-  scroll-padding-top: 90px;     /* Platz fÃ¼r die fixe Navigation beim Anspringen */
+  scroll-padding-top: 90px;     /* Platz für die fixe Navigation beim Anspringen (mobil) */
+  overflow-x: hidden;           /* doppelt hält besser: nie horizontal scrollen */
 }
 
 body {
@@ -109,7 +110,7 @@ section {
 
 /* --------------------------------------------------------------------------
    2. Scroll-Fortschrittsbalken
-   DÃ¼nner Balken ganz oben. Die Breite setzt script.js beim Scrollen.
+   Dünner Balken ganz oben. Die Breite setzt script.js beim Scrollen.
    -------------------------------------------------------------------------- */
 
 #progress {
@@ -130,32 +131,31 @@ section {
    sobald man nach unten scrollt -> dann dunkler Glas-Effekt.
    -------------------------------------------------------------------------- */
 
+/* Desktop: schwebendes Dock am unteren Bildschirmrand.
+   Auf kleineren Bildschirmen (Abschnitt 16) wird die Nav wieder
+   zur klassischen Leiste oben mit Burger-Menü. */
 nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1000;
-  border-bottom: 1px solid transparent;
-  transition: background .3s, border-color .3s, backdrop-filter .3s;
-}
-
-nav.scrolled {
-  background: rgba(6, 10, 18, .75);
+  max-width: calc(100vw - 32px);
+  background: rgba(6, 10, 18, .8);
   backdrop-filter: blur(14px);
-  border-bottom-color: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .45);
 }
 
 .nav-inner {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 18px 24px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 26px;
+  padding: 10px 10px 10px 24px;
 }
 
-/* Logo "Flx.357" â€” das ".357" bekommt den Farbverlauf */
+/* Logo "Flx.357" — das ".357" bekommt den Farbverlauf */
 .logo {
   font-family: var(--font-head);
   font-weight: 700;
@@ -170,7 +170,7 @@ nav.scrolled {
   color: transparent;
 }
 
-/* Rechte Seite der Nav: MenÃ¼, Sprachbutton, Burger */
+/* Rechte Seite der Nav: Menü, Sprachbutton, Burger */
 .nav-right {
   display: flex;
   align-items: center;
@@ -192,7 +192,7 @@ nav.scrolled {
   transition: color .25s;
 }
 
-/* Unterstrich, der bei Hover / aktivem Abschnitt von links reinwÃ¤chst */
+/* Unterstrich, der bei Hover / aktivem Abschnitt von links reinwächst */
 .nav-links a::after {
   content: "";
   position: absolute;
@@ -255,8 +255,8 @@ nav.scrolled {
   background: rgba(56, 189, 248, .1);
 }
 
-/* Burger-MenÃ¼: nur auf dem Handy sichtbar (siehe Abschnitt 16).
-   Die drei <span> sind die Striche â€” mit .open werden sie zum X gedreht. */
+/* Burger-Menü: nur auf dem Handy sichtbar (siehe Abschnitt 16).
+   Die drei <span> sind die Striche — mit .open werden sie zum X gedreht. */
 #burger {
   display: none;
   background: none;
@@ -280,6 +280,13 @@ nav.scrolled {
 #burger.open span:nth-child(2) { opacity: 0; }
 #burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+/* Solange das Handy-Menü offen ist, wird die Seite dahinter gesperrt.
+   Ohne das lässt sich der Inhalt hinter dem Overlay horizontal verschieben.
+   script.js setzt die Klasse beim Öffnen und entfernt sie beim Schließen. */
+body.menu-open {
+  overflow: hidden;
+}
+
 
 /* --------------------------------------------------------------------------
    4. Hero (Startbereich)
@@ -295,7 +302,7 @@ nav.scrolled {
   overflow: hidden;
 }
 
-/* ZeichenflÃ¤che fÃ¼r das Partikel-Netzwerk (fÃ¼llt den ganzen Hero) */
+/* Zeichenfläche für das Partikel-Netzwerk (füllt den ganzen Hero) */
 #particles {
   position: absolute;
   inset: 0;
@@ -335,8 +342,8 @@ nav.scrolled {
   50%      { transform: translateY(40px) scale(1.06); }
 }
 
-/* Dezentes Gitternetz â€” reines CSS aus zwei Verlaufslinien.
-   Die mask-image blendet es zu den RÃ¤ndern hin aus. */
+/* Dezentes Gitternetz — reines CSS aus zwei Verlaufslinien.
+   Die mask-image blendet es zu den Rändern hin aus. */
 .hero-grid {
   position: absolute;
   inset: 0;
@@ -354,7 +361,7 @@ nav.scrolled {
   max-width: 820px;
 }
 
-/* Kleines "Available"-Badge mit pulsierendem grÃ¼nem Punkt */
+/* Kleines "Available"-Badge mit pulsierendem grünem Punkt */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -382,7 +389,7 @@ nav.scrolled {
   100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
 }
 
-/* GroÃŸe Ãœberschrift â€” clamp() skaliert die Schrift mit der Fensterbreite */
+/* Große Überschrift — clamp() skaliert die Schrift mit der Fensterbreite */
 #hero h1 {
   font-size: clamp(2.6rem, 6.5vw, 4.6rem);
   font-weight: 700;
@@ -475,8 +482,8 @@ nav.scrolled {
   border-color: var(--accent);
 }
 
-/* Werkzeug-Zeile unter den Buttons: schlichte Chips statt groÃŸer Zahlen.
-   Die .chip-Optik kommt aus Abschnitt 7 (wird Ã¼berall wiederverwendet). */
+/* Werkzeug-Zeile unter den Buttons: schlichte Chips statt großer Zahlen.
+   Die .chip-Optik kommt aus Abschnitt 7 (wird überall wiederverwendet). */
 .hero-tools {
   max-width: 680px;
 }
@@ -497,7 +504,7 @@ nav.scrolled {
 
 
 /* --------------------------------------------------------------------------
-   5. Section-Ãœberschriften
+   5. Section-Überschriften
    Jede Section nutzt dasselbe Muster: kleines Label, Titel, Einleitung.
    -------------------------------------------------------------------------- */
 
@@ -545,7 +552,7 @@ nav.scrolled {
   animation: float 18s ease-in-out infinite;   /* @keyframes float aus dem Hero */
 }
 
-/* Inhalte Ã¼ber die Glows heben */
+/* Inhalte über die Glows heben */
 section > .container {
   position: relative;
   z-index: 1;
@@ -556,7 +563,7 @@ section > .container {
    sichtbar bleibt nur ein weicher Farbschimmer am Rand. */
 #timeline .glow { top: 80px;    right: -200px; background: #4338ca; }                       /* Indigo  */
 #skills .glow   { bottom: 40px; left: -220px;  background: #0e7490; animation-delay: -6s; } /* Petrol  */
-#insights .glow { top: 60px;    right: -220px; background: #0f766e; animation-delay: -3s; } /* TÃ¼rkis  */
+#insights .glow { top: 60px;    right: -220px; background: #0f766e; animation-delay: -3s; } /* Türkis  */
 #why .glow      { bottom: 60px; left: -200px;  background: #4338ca; animation-delay: -9s; } /* Indigo  */
 
 
@@ -679,7 +686,7 @@ section > .container {
   padding-bottom: 0;
 }
 
-/* Punkt auf der Linie (Ring, der Kern kommt Ã¼ber ::after) */
+/* Punkt auf der Linie (Ring, der Kern kommt über ::after) */
 .t-dot {
   position: absolute;
   left: 8px;
@@ -710,7 +717,7 @@ section > .container {
   transition: transform .3s, border-color .3s, background .3s;
 }
 
-/* Karte rÃ¼ckt bei Hover leicht nach rechts */
+/* Karte rückt bei Hover leicht nach rechts */
 .t-card:hover {
   transform: translateX(6px);
   border-color: rgba(56, 189, 248, .4);
@@ -790,7 +797,7 @@ section > .container {
 }
 
 /* "Warum ich"-Bereich: nutzt die Insight-Karten im 2x2-Raster,
-   jede Karte bekommt eine groÃŸe Nummer mit Farbverlauf */
+   jede Karte bekommt eine große Nummer mit Farbverlauf */
 .why-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -834,7 +841,7 @@ section > .container {
   transition: transform .3s, border-color .3s;
 }
 
-/* Lichtschein-Overlay (unsichtbar, bis die Maus Ã¼ber der Karte ist) */
+/* Lichtschein-Overlay (unsichtbar, bis die Maus über der Karte ist) */
 .skill-card::after {
   content: "";
   position: absolute;
@@ -882,7 +889,7 @@ section > .container {
 }
 
 /* Chips statt Prozent-Balken: ehrlicher und ruhiger.
-   Die Chips sind hier etwas grÃ¶ÃŸer als sonst, damit die Karten gefÃ¼llt wirken. */
+   Die Chips sind hier etwas größer als sonst, damit die Karten gefüllt wirken. */
 .skill-chips {
   display: flex;
   flex-wrap: wrap;
@@ -898,7 +905,7 @@ section > .container {
 /* --------------------------------------------------------------------------
    10. Work (Projekte & Services)
    Sechs Karten im 3er-Raster. Bei Hover hebt sich die Karte an
-   und oben wÃ¤chst eine Farblinie von links rein (::before).
+   und oben wächst eine Farblinie von links rein (::before).
    -------------------------------------------------------------------------- */
 
 #work {
@@ -967,7 +974,7 @@ section > .container {
 .work-card p {
   color: var(--muted);
   font-size: .93rem;
-  flex: 1;    /* drÃ¼ckt die Chips ans untere Kartenende */
+  flex: 1;    /* drückt die Chips ans untere Kartenende */
 }
 
 .work-card .t-tags {
@@ -1010,7 +1017,7 @@ section > .container {
 
 /* --------------------------------------------------------------------------
    12. Kontakt
-   Eine groÃŸe Karte mit E-Mail, Telefon und Standort.
+   Eine große Karte mit E-Mail, Telefon und Standort.
    -------------------------------------------------------------------------- */
 
 .contact-wrap {
@@ -1088,7 +1095,7 @@ section > .container {
 
 footer {
   border-top: 1px solid var(--border);
-  padding: 34px 0;
+  padding: 34px 0 120px;    /* unten extra Platz, damit das Nav-Dock nichts verdeckt */
   text-align: center;
   color: var(--muted);
   font-size: .88rem;
@@ -1104,7 +1111,7 @@ footer .logo {
 /* --------------------------------------------------------------------------
    13b. Cookie-Banner
    Liegt fix unten in der Mitte. Startet unsichtbar und leicht abgesenkt;
-   script.js entfernt das hidden-Attribut und hÃ¤ngt .show an,
+   script.js entfernt das hidden-Attribut und hängt .show an,
    dann gleitet das Banner sanft nach oben ins Bild.
    -------------------------------------------------------------------------- */
 
@@ -1168,7 +1175,7 @@ footer .logo {
   transform: translateY(-2px);
 }
 
-/* "Akzeptieren": auffÃ¤llig mit Farbverlauf */
+/* "Akzeptieren": auffällig mit Farbverlauf */
 .cookie-btn-accept {
   border: none;
   background: var(--grad);
@@ -1191,7 +1198,7 @@ footer .logo {
 /* --------------------------------------------------------------------------
    14. Scroll-Animationen (Reveal)
    Alles mit der Klasse .reveal startet unsichtbar und leicht nach unten
-   verschoben. script.js hÃ¤ngt .visible an, sobald das Element ins
+   verschoben. script.js hängt .visible an, sobald das Element ins
    Sichtfeld scrollt -> es blendet sanft ein.
    data-delay="1" bis "3" staffelt benachbarte Elemente zeitlich.
    -------------------------------------------------------------------------- */
@@ -1244,7 +1251,9 @@ footer .logo {
    Zwei Stufen: Tablet (bis 920px) und Handy (bis 640px).
    -------------------------------------------------------------------------- */
 
-/* Tablet: Raster auf eine bzw. zwei Spalten reduzieren */
+/* Tablet & Handy: Raster reduzieren, Nav wieder als Leiste oben.
+   Das Dock vom Desktop hätte hier nicht genug Platz, deshalb gibt es
+   ab 920px abwärts die klassische Top-Bar mit Burger-Menü. */
 @media (max-width: 920px) {
   .about-grid,
   .skills-grid,
@@ -1264,12 +1273,46 @@ footer .logo {
   section {
     padding: 80px 0;
   }
-}
 
-/* Handy: Burger-MenÃ¼ aktiv, alles einspaltig.
-   Der Sprachbutton bleibt neben dem Burger immer sichtbar. */
-@media (max-width: 640px) {
-  /* MenÃ¼ wird zum Vollbild-Overlay, das von rechts reinfÃ¤hrt */
+  /* Nav: vom Dock zurück zur Leiste am oberen Rand */
+  nav {
+    top: 0;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    transform: none;
+    max-width: none;
+    border: none;
+    border-bottom: 1px solid transparent;
+    border-radius: 0;
+    background: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+    transition: background .3s, border-color .3s, backdrop-filter .3s;
+  }
+
+  /* Glas-Effekt erst beim Scrollen (Klasse kommt aus script.js) */
+  nav.scrolled {
+    background: rgba(6, 10, 18, .75);
+    backdrop-filter: blur(14px);
+    border-bottom-color: var(--border);
+  }
+
+  .nav-inner {
+    justify-content: space-between;
+    padding: 14px 20px;
+    gap: 14px;
+  }
+
+  .nav-right {
+    gap: 12px;
+  }
+
+  #burger {
+    display: block;
+  }
+
+  /* Menü wird zum Vollbild-Overlay, das von rechts reinfährt */
   .nav-links {
     position: fixed;
     inset: 0;
@@ -1291,14 +1334,14 @@ footer .logo {
     font-size: 1.25rem;
   }
 
-  #burger {
-    display: block;
+  /* Nav oben statt unten: der Footer braucht den Extra-Platz nicht mehr */
+  footer {
+    padding: 34px 0;
   }
+}
 
-  .nav-right {
-    gap: 12px;
-  }
-
+/* Handy: alles einspaltig */
+@media (max-width: 640px) {
   .work-grid {
     grid-template-columns: 1fr;
   }
@@ -1308,7 +1351,7 @@ footer .logo {
   }
 
   /* Glows auf dem Handy kleiner und noch dezenter,
-     sonst fÃ¼llen sie den halben Bildschirm */
+     sonst füllen sie den halben Bildschirm */
   .glow {
     width: 340px;
     height: 340px;

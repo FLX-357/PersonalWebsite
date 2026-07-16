@@ -341,6 +341,9 @@
   burger.addEventListener("click", function () {
     burger.classList.toggle("open");
     navLinks.classList.toggle("open");
+    // Seite hinter dem offenen Menü sperren, damit nichts
+    // horizontal oder vertikal mitscrollt (CSS: body.menu-open)
+    document.body.classList.toggle("menu-open", navLinks.classList.contains("open"));
   });
 
   // Nach Klick auf einen Menüpunkt das Overlay wieder schließen
@@ -348,6 +351,7 @@
     link.addEventListener("click", function () {
       burger.classList.remove("open");
       navLinks.classList.remove("open");
+      document.body.classList.remove("menu-open");
     });
   });
 
@@ -605,4 +609,3 @@
   setLanguage(savedLang);
 
 })();
-
