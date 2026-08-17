@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services | Felix Bettenworth · FLXUniversal</title>
+<meta name="description" content="Freelance services by Felix Bettenworth: Amazon product development and FBA, paid campaigns, SEO &amp; SEA, webshops and websites, tracking and analytics, design and print — from Wedel near Hamburg.">
+<meta property="og:title" content="Services | Felix Bettenworth · FLXUniversal">
+<meta property="og:description" content="Amazon product development, campaigns, SEO &amp; SEA, websites, tracking and design — freelance, from one person.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1220'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='28' font-weight='700' fill='%2338bdf8' text-anchor='middle'%3EFB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="progress"></div>
+
+<!-- Gleiche Navigation wie auf der Startseite, nur mit den
+     Ankern dieser Seite. "About me" führt zurück zu index.html. -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Flx<span>.357</span></a>
+    <div class="nav-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" data-i18n="snav.about">About me</a></li>
+        <li><a href="#services" data-i18n="snav.services">Services</a></li>
+        <li><a href="#process" data-i18n="snav.process">How it works</a></li>
+        <li><a href="#pricing" data-i18n="snav.pricing">Pricing</a></li>
+        <li><a href="#contact" class="nav-cta" data-i18n="snav.contact">Request a quote</a></li>
+      </ul>
+      <button id="langToggle" aria-label="Sprache wechseln / switch language">DE</button>
+      <button id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section id="hero" class="hero-compact">
+  <canvas id="particles"></canvas>
+  <div class="hero-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="container hero-content">
+    <div class="badge"><span class="dot"></span><span data-i18n="shero.badge">Currently taking on new clients</span></div>
+    <h1 data-scramble data-i18n="shero.title">What I can do<br><span class="grad">for your business.</span></h1>
+    <p class="hero-sub" data-i18n="shero.sub">Everything a modern agency offers — product development for Amazon, campaigns, SEO and SEA, websites and shops, tracking, design and print. Only without the agency: you talk to the person who does the work.</p>
+    <div class="btn-row">
+      <a href="#services" class="btn btn-primary"><span data-i18n="shero.cta1">See all services</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#contact" class="btn btn-ghost" data-i18n="shero.cta2">Request a quote</a>
+    </div>
+    <div class="hero-tools">
+      <span class="tools-label" data-i18n="shero.toolsLabel">Where I can help</span>
+      <div class="t-tags">
+        <span class="chip" data-i18n="shero.t1">Amazon &amp; product development</span>
+        <span class="chip" data-i18n="shero.t2">Paid campaigns</span>
+        <span class="chip">SEO &amp; SEA</span>
+        <span class="chip" data-i18n="shero.t4">Websites &amp; shops</span>
+        <span class="chip" data-i18n="shero.t5">Tracking</span>
+        <span class="chip" data-i18n="shero.t6">Design &amp; print</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section id="services">
+  <div class="glow"></div>
+  <div class="container">
+    <span class="sec-tag reveal" data-i18n="srv.tag">Services</span>
+    <h2 class="sec-title reveal" data-scramble data-i18n="srv.title">Six things I do well.</h2>
+    <p class="sec-lead reveal" data-i18n="srv.lead">You can book a single one or the whole chain. Most clients start with one and add the rest once they see it working.</p>
+
+    <div class="service-list">
+
+      <!-- 01 Amazon -->
+      <article class="service-card reveal" id="s-amazon">
+        <div class="service-head">
+          <span class="service-num">01</span>
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></div>
+          <div class="service-title">
+            <h3 data-i18n="s1.title">Amazon &amp; Product Development</h3>
+            <p data-i18n="s1.lead">From "I have an idea" to a product that sells on Amazon. I do this for my own brand every day, so you get the version that already survived contact with reality.</p>
+          </div>
+        </div>
+        <ul class="service-points">
+          <li data-i18n="s1.p1"><b>Niche &amp; competitor research</b> — demand, margins and how beatable the competition really is, based on Helium 10 data instead of gut feeling.</li>
+          <li data-i18n="s1.p2"><b>Product development &amp; sourcing</b> — finding manufacturers, comparing quotes, sample rounds and improving the product where the reviews of competitors show the weak spots.</li>
+          <li data-i18n="s1.p3"><b>Import, customs &amp; logistics</b> — getting the goods to Germany and into the FBA warehouse without expensive surprises.</li>
+          <li data-i18n="s1.p4"><b>Listing that ranks and converts</b> — keyword research, title, bullets, description, A+ content and backend keywords.</li>
+          <li data-i18n="s1.p5"><b>Images, photos and 3D renderings</b> — the main image decides whether anyone even clicks. Done in-house with Affinity Photo and KeyShot.</li>
+          <li data-i18n="s1.p6"><b>Launch strategy</b> — pricing, PPC push, review build-up and what to do in the first weeks when nothing moves yet.</li>
+        </ul>
+        <div class="t-tags"><span class="chip">Helium 10</span><span class="chip">Seller Central</span><span class="chip">A+ Content</span><span class="chip">FBA</span></div>
+      </article>
+
+      <!-- 02 Kampagnen -->
+      <article class="service-card reveal" id="s-ads">
+        <div class="service-head">
+          <span class="service-num">02</span>
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg></div>
+          <div class="service-title">
+            <h3 data-i18n="s2.title">Campaigns &amp; Paid Advertising</h3>
+            <p data-i18n="s2.lead">Ads that are judged by what they bring in, not by how many impressions they collect. I run campaigns with my own money, so I know what a bad ACOS feels like.</p>
+          </div>
+        </div>
+        <ul class="service-points">
+          <li data-i18n="s2.p1"><b>Amazon PPC</b> — Sponsored Products, Brands and Display: campaign structure, keyword harvesting, bid management and negative keywords that actually get maintained.</li>
+          <li data-i18n="s2.p2"><b>Google Ads &amp; Google Shopping</b> — search, Performance Max and Shopping including the product feed. Also international setups across several countries and languages.</li>
+          <li data-i18n="s2.p3"><b>Microsoft Advertising</b> — the channel most people forget, often with noticeably cheaper clicks in B2B.</li>
+          <li data-i18n="s2.p4"><b>Meta Ads</b> — Facebook and Instagram for products that need to be shown rather than searched for.</li>
+          <li data-i18n="s2.p5"><b>Ongoing optimisation</b> — weekly or monthly, with a report you can read in five minutes: what was spent, what came back, what I changed and why.</li>
+          <li data-i18n="s2.p6"><b>Account rescue</b> — taking over an account that someone else set up, cleaning it out and finding where the budget leaks.</li>
+        </ul>
+        <div class="t-tags"><span class="chip">Amazon PPC</span><span class="chip">Google Ads</span><span class="chip">Microsoft Ads</span><span class="chip">Meta Ads</span></div>
+      </article>
+
+      <!-- 03 SEO & SEA -->
+      <article class="service-card reveal" id="s-seo">
+        <div class="service-head">
+          <span class="service-num">03</span>
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+          <div class="service-title">
+            <h3 data-i18n="s3.title">SEO &amp; SEA</h3>
+            <p data-i18n="s3.lead">Paid traffic works from day one but stops the moment you stop paying. Organic takes longer and then keeps running. Most businesses need both — the question is the ratio.</p>
+          </div>
+        </div>
+        <ul class="service-points">
+          <li data-i18n="s3.p1"><b>Technical SEO</b> — site structure, loading speed, mobile, indexing, structured data. The unspectacular part that most sites fail at.</li>
+          <li data-i18n="s3.p2"><b>Keyword research &amp; content planning</b> — which terms are actually worth ranking for at your size, and what content is needed for them.</li>
+          <li data-i18n="s3.p3"><b>On-page optimisation</b> — titles, meta descriptions, headings, internal linking and product texts that read like they were written for humans.</li>
+          <li data-i18n="s3.p4"><b>Amazon SEO</b> — ranking inside Amazon works differently from Google. Listing structure, keyword coverage and the relationship between PPC and organic rank.</li>
+          <li data-i18n="s3.p5"><b>Local SEO</b> — Google Business Profile and local visibility for businesses whose customers come from the neighbourhood.</li>
+          <li data-i18n="s3.p6"><b>Honest reporting</b> — rankings, traffic and what it means. If a measure didn't work, you'll hear that too.</li>
+        </ul>
+        <div class="t-tags"><span class="chip">On-page SEO</span><span class="chip">Amazon SEO</span><span class="chip">Search Console</span><span class="chip">Local SEO</span></div>
+      </article>
+
+      <!-- 04 Websites -->
+      <article class="service-card reveal" id="s-web">
+        <div class="service-head">
+          <span class="service-num">04</span>
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <div class="service-title">
+            <h3 data-i18n="s4.title">Websites &amp; Shops — Build and Maintain</h3>
+            <p data-i18n="s4.lead">A site that loads fast, works on a phone and that you can still update in two years. Built to fit the job: hand-coded when it should be light, WordPress or Shopify when you need to edit it yourself.</p>
+          </div>
+        </div>
+        <ul class="service-points">
+          <li data-i18n="s4.p1"><b>Business websites</b> — from a one-page presence to a multi-page site with blog, hand-coded or on WordPress depending on what you'll need to change yourself.</li>
+          <li data-i18n="s4.p2"><b>Online shops</b> — WooCommerce and Shopify: product data, variants, payment providers, shipping rules, tax settings and a checkout that doesn't lose people.</li>
+          <li data-i18n="s4.p3"><b>Dropshipping setups</b> — supplier connection, automated order flow and the ads that bring the traffic.</li>
+          <li data-i18n="s4.p4"><b>Relaunch &amp; rescue</b> — taking over an existing site that's slow, broken or built by someone who has since disappeared.</li>
+          <li data-i18n="s4.p5"><b>Maintenance &amp; care</b> — updates, backups, security, hosting, small changes. A monthly arrangement so you don't have to think about it.</li>
+          <li data-i18n="s4.p6"><b>Legal basics built in</b> — cookie consent, privacy policy and imprint properly integrated (texts from your lawyer, integration from me).</li>
+        </ul>
+        <div class="t-tags"><span class="chip">WordPress</span><span class="chip">WooCommerce</span><span class="chip">Shopify</span><span class="chip">HTML/CSS/JS</span></div>
+      </article>
+
+      <!-- 05 Tracking -->
+      <article class="service-card reveal" id="s-data">
+        <div class="service-head">
+          <span class="service-num">05</span>
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+          <div class="service-title">
+            <h3 data-i18n="s5.title">Tracking, Data &amp; Automation</h3>
+            <p data-i18n="s5.lead">If you can't measure it, you can't scale it. And if you measure it wrongly, you'll scale the wrong thing — which is worse.</p>
+          </div>
+        </div>
+        <ul class="service-points">
+          <li data-i18n="s5.p1"><b>Google Tag Manager &amp; GA4</b> — a clean setup with events that mean something, not forty tags nobody dares to touch.</li>
+          <li data-i18n="s5.p2"><b>Conversion tracking</b> — for Google, Meta and Microsoft, checked against the shop's own numbers so the platforms don't just report what you want to hear.</li>
+          <li data-i18n="s5.p3"><b>Consent &amp; GDPR</b> — consent banner, consent mode and tags that genuinely only fire when they're allowed to.</li>
+          <li data-i18n="s5.p4"><b>Dashboards &amp; analysis</b> — the numbers that matter in one view. For bigger data sets I use Python, SQL or R instead of a spreadsheet that takes a minute to open.</li>
+          <li data-i18n="s5.p5"><b>Automation</b> — recurring manual work (reports, product data, price checks) turned into a script that just runs.</li>
+          <li data-i18n="s5.p6"><b>AI in the workflow</b> — where AI genuinely saves time in content and analysis, and where it just produces text nobody wants to read. My thesis was on exactly this question.</li>
+        </ul>
+        <div class="t-tags"><span class="chip">GTM</span><span class="chip">GA4</span><span class="chip">Python</span><span class="chip">SQL</span></div>
+      </article>
+
+      <!-- 06 Design & Print -->
+      <article class="service-card reveal" id="s-design">
+        <div class="service-head">
+          <span class="service-num">06</span>
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
+          <div class="service-title">
+            <h3 data-i18n="s6.title">Design, Print &amp; Content</h3>
+            <p data-i18n="s6.lead">The visible half. A good product with bad pictures sells worse than a mediocre product with good ones — unfair, but that's how it works.</p>
+          </div>
+        </div>
+        <ul class="service-points">
+          <li data-i18n="s6.p1"><b>Print material</b> — business cards, flyers, restaurant menus, brochures, posters and labels, delivered print-ready.</li>
+          <li data-i18n="s6.p2"><b>Product photography</b> — clean product shots on white for the shop and Amazon, plus lifestyle images that show the product in use.</li>
+          <li data-i18n="s6.p3"><b>Image editing &amp; infographics</b> — retouching, cut-outs and the graphics that explain a product in the listing gallery.</li>
+          <li data-i18n="s6.p4"><b>3D renderings</b> — product visuals with KeyShot when the product doesn't exist yet or a photo can't show it.</li>
+          <li data-i18n="s6.p5"><b>Video editing</b> — product and ad videos cut in DaVinci Resolve, in the formats each platform wants.</li>
+          <li data-i18n="s6.p6"><b>Brand basics</b> — logo, colours, fonts and a small style guide so everything you publish looks like it belongs together.</li>
+        </ul>
+        <div class="t-tags"><span class="chip">Affinity Photo</span><span class="chip">KeyShot</span><span class="chip">DaVinci Resolve</span><span class="chip">Print</span></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABLAUF ================= -->
+<section id="process">
+  <div class="glow"></div>
+  <div class="container">
+    <span class="sec-tag reveal" data-i18n="pr.tag">How it works</span>
+    <h2 class="sec-title reveal" data-scramble data-i18n="pr.title">From first message to running project.</h2>
+    <p class="sec-lead reveal" data-i18n="pr.lead">No onboarding marathon. Five steps, and you know after the first one whether it's worth continuing.</p>
+    <div class="process-grid">
+      <div class="process-card reveal">
+        <span class="process-num">01</span>
+        <h4 data-i18n="pr1.title">You get in touch</h4>
+        <p data-i18n="pr1.text">A short message with what you're planning is enough. Form below or just an email. I reply within 24 hours, usually faster.</p>
+      </div>
+      <div class="process-card reveal" data-delay="1">
+        <span class="process-num">02</span>
+        <h4 data-i18n="pr2.title">Free first call</h4>
+        <p data-i18n="pr2.text">30 minutes, no cost, no sales pitch. We look at where you stand and what would actually help. If I'm not the right person for it, I'll say so.</p>
+      </div>
+      <div class="process-card reveal" data-delay="2">
+        <span class="process-num">03</span>
+        <h4 data-i18n="pr3.title">Quote with a fixed scope</h4>
+        <p data-i18n="pr3.text">You get a written quote listing what's included, what it costs and how long it takes. No hidden extras appearing halfway through.</p>
+      </div>
+      <div class="process-card reveal" data-delay="1">
+        <span class="process-num">04</span>
+        <h4 data-i18n="pr4.title">Implementation</h4>
+        <p data-i18n="pr4.text">I build it, you stay informed. Regular updates, and you can reach me directly — not through a contact form or an account manager.</p>
+      </div>
+      <div class="process-card reveal" data-delay="2">
+        <span class="process-num">05</span>
+        <h4 data-i18n="pr5.title">Handover or ongoing care</h4>
+        <p data-i18n="pr5.text">Either you get everything explained and take it over yourself, or I keep looking after it — maintenance, campaigns, reporting. Your call, no lock-in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PREISE ================= -->
+<section id="pricing">
+  <div class="container">
+    <span class="sec-tag reveal" data-i18n="pc.tag">Pricing</span>
+    <h2 class="sec-title reveal" data-scramble data-i18n="pc.title">No package prices. On purpose.</h2>
+    <div class="pricing-wrap reveal">
+      <p class="pricing-lead" data-i18n="pc.lead">I don't publish fixed packages, because a "website from €X" either overcharges the small project or shortchanges the big one. What a project costs depends on its size and complexity — and I can only judge that once I know what you're planning.</p>
+      <div class="pricing-grid">
+        <div class="pricing-item">
+          <h4 data-i18n="pc1.title">What drives the price</h4>
+          <ul>
+            <li data-i18n="pc1.l1">Scope: one landing page or a shop with 400 products</li>
+            <li data-i18n="pc1.l2">Complexity: standard setup or special requirements</li>
+            <li data-i18n="pc1.l3">Starting point: from scratch or fixing what exists</li>
+            <li data-i18n="pc1.l4">Timeline: normal schedule or urgent</li>
+            <li data-i18n="pc1.l5">Ongoing care: one-off project or monthly support</li>
+          </ul>
+        </div>
+        <div class="pricing-item">
+          <h4 data-i18n="pc2.title">What you can count on</h4>
+          <ul>
+            <li data-i18n="pc2.l1">A written quote before anything starts</li>
+            <li data-i18n="pc2.l2">A fixed price for a fixed scope — no surprise invoices</li>
+            <li data-i18n="pc2.l3">Extra work is agreed beforehand, never afterwards</li>
+            <li data-i18n="pc2.l4">Free first call, whether or not it turns into a project</li>
+            <li data-i18n="pc2.l5">An honest no if I'm not the right fit for your project</li>
+          </ul>
+        </div>
+      </div>
+      <a href="#contact" class="btn btn-primary"><span data-i18n="pc.btn">Get a quote</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= KONTAKT ================= -->
+<!-- Aufbau identisch zur Startseite, nur zeigen die beiden Buttons
+     woanders hin: hier direkt in die E-Mail und zurück zur Über-mich-Seite. -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-wrap reveal">
+      <span class="sec-tag" data-i18n="sc.tag">Contact</span>
+      <h2 data-scramble data-i18n="sc.title">Tell me what you're<br>planning.</h2>
+      <p data-i18n="sc.text">A short message with what you're planning is enough — what you have, what you want, and roughly by when. I'll come back with a first assessment and an honest answer on whether I'm the right person for it.</p>
+      <div class="contact-cards">
+        <a class="c-card" href="mailto:FLXUniversal@outlook.com">
+          <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+          <div><span data-i18n="sc.emailLabel">Email</span><b>FLXUniversal@outlook.com</b></div>
+        </a>
+        <div class="c-card">
+          <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <div><span data-i18n="sc.locLabel">Based in</span><b data-i18n="sc.loc">Wedel / Hamburg, Germany</b></div>
+        </div>
+        <div class="c-card">
+          <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+          <div><span data-i18n="sc.timeLabel">Response time</span><b data-i18n="sc.time">Usually within 24 hours</b></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <a href="mailto:FLXUniversal@outlook.com" class="btn btn-primary"><span data-i18n="sc.btnMail">Send me an email</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="index.html" class="btn btn-ghost" data-i18n="sc.btnAbout">More about me</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <span class="logo">Flx<span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">.357</span></span>
+    <p>© <span id="year"></span> <span data-i18n="footer.text">FLXUniversal · Felix Bettenworth · Wedel, Germany</span></p>
+    <p class="footer-links"><a href="index.html" data-i18n="footer.l1">About me</a> · <a href="services.html" data-i18n="footer.l2">Services</a> · <a href="mailto:FLXUniversal@outlook.com" data-i18n="footer.l3">Email</a></p>
+  </div>
+</footer>
+
+<div id="cookieBanner" class="cookie-banner" hidden>
+  <div class="cookie-text">
+    <b data-i18n="cookie.title">Quick cookie question</b>
+    <p data-i18n="cookie.text">I use cookies to see how the site is used and to make it better. Okay for you?</p>
+  </div>
+  <div class="cookie-actions">
+    <button id="cookieDecline" class="cookie-btn cookie-btn-ghost" data-i18n="cookie.decline">No thanks</button>
+    <button id="cookieAccept" class="cookie-btn cookie-btn-accept" data-i18n="cookie.accept">Accept</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
