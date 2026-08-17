@@ -605,3 +605,412 @@
 
     // Längere Überschriften dürfen etwas länger brauchen, aber nie ewig
     const duration = Math.min(320 + totalChars * 16, 1500);
+    const startTime = performance.now();
+
+    // Höhe einfrieren, bevor das erste Zeichen getauscht wird. Ohne das
+    // springt bei einem anderen Zeilenumbruch die halbe Seite.
+    element.style.minHeight = element.getBoundingClientRect().height + "px";
+
+    const state = { frameId: 0, snapshot: snapshot };
+    runningScrambles.set(element, state);
+    element.classList.add("is-scrambling");
+
+    function frame(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const revealedCount = Math.floor(progress * totalChars);
+
+      let index = 0;
+      textNodes.forEach(function (entry) {
+        let output = "";
+        for (let i = 0; i < entry.text.length; i++, index++) {
+          output += (index < revealedCount) ? entry.text[i] : scrambledChar(entry.text[i]);
+        }
+        entry.node.nodeValue = output;
+      });
+
+      if (progress < 1) {
+        state.frameId = requestAnimationFrame(frame);
+      } else {
+        finishScramble(element, state);
+      }
+    }
+
+    state.frameId = requestAnimationFrame(frame);
+  }
+
+  // Auslöser: sobald eine Überschrift ins Bild kommt, einmal auflösen.
+  // Überschriften, die beim Laden schon sichtbar sind (z. B. im Hero),
+  // melden sich sofort — genau das ist gewünscht.
+  if (!reducedMotion && scrambleElements.length) {
+    const scrambleObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          runScramble(entry.target);
+          scrambleObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
+
+    scrambleElements.forEach(function (element) {
+      scrambleObserver.observe(element);
+    });
+  }
+
+  // Nach einem Sprachwechsel: alles, was gerade im Bild ist, neu auflösen
+  function replayVisibleScrambles() {
+    if (reducedMotion) {
+      return;
+    }
+    scrambleElements.forEach(function (element) {
+      const box = element.getBoundingClientRect();
+      const isVisible = box.top < window.innerHeight && box.bottom > 0;
+      if (isVisible) {
+        runScramble(element);
+      }
+    });
+  }
+
+
+  /* ------------------------------------------------------------------------
+     4. Navigation
+     - beim Scrollen bekommt die Nav die Klasse .scrolled
+       (Glas-Optik für die Top-Bar auf Tablet/Handy)
+     - der Balken oben zeigt an, wie weit man auf der Seite ist
+     - der Menüpunkt der Section, in der man sich befindet, wird markiert
+     - Burger-Button öffnet/schließt das Menü auf dem Handy und sperrt
+       dabei die Seite dahinter (body.menu-open)
+     ------------------------------------------------------------------------ */
+
+  const nav = document.getElementById("nav");
+  const progressBar = document.getElementById("progress");
+  const allNavLinks = document.querySelectorAll(".nav-links a");
+  const anchorLinks = document.querySelectorAll(".nav-links a[href^='#']");
+
+  // Jedem Anker-Menülink seine Ziel-Section zuordnen (für die Markierung)
+  const linkedSections = [];
+  anchorLinks.forEach(function (link) {
+    const section = document.querySelector(link.getAttribute("href"));
+    if (section) {
+      linkedSections.push({ link: link, section: section });
+    }
+  });
+
+  function handleScroll() {
+    const scrollY = window.scrollY;
+
+    // Glas-Effekt an/aus
+    if (nav) {
+      nav.classList.toggle("scrolled", scrollY > 40);
+    }
+
+    // Fortschrittsbalken: gescrollte Strecke / maximal scrollbare Strecke
+    if (progressBar) {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (maxScroll > 0 ? (scrollY / maxScroll) * 100 : 0) + "%";
+    }
+
+    // Aktive Section finden: die letzte, deren Oberkante schon erreicht ist
+    // (140px Puffer, damit die Markierung nicht erst am Section-Anfang umspringt)
+    let currentEntry = null;
+    linkedSections.forEach(function (entry) {
+      if (entry.section.offsetTop - 140 <= scrollY) {
+        currentEntry = entry;
+      }
+    });
+
+    anchorLinks.forEach(function (link) {
+      link.classList.remove("active");
+    });
+    if (currentEntry) {
+      currentEntry.link.classList.add("active");
+    }
+  }
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  handleScroll(); // einmal direkt ausführen, falls die Seite gescrollt lädt
+
+  // Burger-Menü (Handy)
+  const burger = document.getElementById("burger");
+  const navLinks = document.getElementById("navLinks");
+
+  if (burger && navLinks) {
+    burger.addEventListener("click", function () {
+      burger.classList.toggle("open");
+      navLinks.classList.toggle("open");
+      // Seite hinter dem offenen Menü sperren, damit nichts
+      // horizontal oder vertikal mitscrollt (CSS: body.menu-open)
+      document.body.classList.toggle("menu-open", navLinks.classList.contains("open"));
+    });
+
+    // Nach Klick auf einen Menüpunkt das Overlay wieder schließen —
+    // auch bei den Links, die auf die andere Seite führen.
+    allNavLinks.forEach(function (link) {
+      link.addEventListener("click", function () {
+        burger.classList.remove("open");
+        navLinks.classList.remove("open");
+        document.body.classList.remove("menu-open");
+      });
+    });
+  }
+
+
+  /* ------------------------------------------------------------------------
+     5. Einblend-Animationen beim Scrollen
+     Ein IntersectionObserver meldet, sobald ein .reveal-Element ins
+     Sichtfeld kommt. Dann bekommt es .visible und die CSS-Transition
+     blendet es ein. Danach wird es nicht weiter beobachtet (unobserve),
+     die Animation läuft also pro Element nur einmal.
+     ------------------------------------------------------------------------ */
+
+  const revealElements = document.querySelectorAll(".reveal");
+
+  const revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,                  // 12% des Elements müssen sichtbar sein
+    rootMargin: "0px 0px -40px 0px"   // löst etwas vor dem unteren Rand aus
+  });
+
+  revealElements.forEach(function (element) {
+    revealObserver.observe(element);
+  });
+
+
+  /* ------------------------------------------------------------------------
+     6. Lichtschein auf den Skill-Karten
+     Bei jeder Mausbewegung wird die Position relativ zur Karte in die
+     CSS-Variablen --mx / --my geschrieben. Das ::after-Overlay im CSS
+     legt an genau diese Stelle einen radialen Verlauf.
+     ------------------------------------------------------------------------ */
+
+  document.querySelectorAll(".skill-card").forEach(function (card) {
+    card.addEventListener("mousemove", function (event) {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty("--mx", (event.clientX - rect.left) + "px");
+      card.style.setProperty("--my", (event.clientY - rect.top) + "px");
+    });
+  });
+
+
+  /* ------------------------------------------------------------------------
+     7. Partikel-Netzwerk im Hero
+     Punkte treiben langsam über ein Canvas und prallen an den Rändern ab.
+     Kommen sich zwei Punkte näher als 130px, wird eine Linie zwischen
+     ihnen gezeichnet — je näher, desto kräftiger.
+     Läuft über requestAnimationFrame (~60 Bilder/Sekunde) und pausiert,
+     wenn der Tab im Hintergrund ist.
+     ------------------------------------------------------------------------ */
+
+  const canvas = document.getElementById("particles");
+
+  if (canvas && !reducedMotion) {
+    const ctx = canvas.getContext("2d");
+
+    const LINK_DISTANCE = 130;   // ab dieser Entfernung (px) keine Linie mehr
+    const MAX_PARTICLES = 90;
+
+    let particles = [];
+    let canvasWidth = 0;
+    let canvasHeight = 0;
+    let animationId;
+
+    // Canvas an die Hero-Größe anpassen und Punkte neu verteilen
+    function setupCanvas() {
+      const hero = document.getElementById("hero");
+      canvasWidth = canvas.width = hero.offsetWidth;
+      canvasHeight = canvas.height = hero.offsetHeight;
+
+      // Anzahl der Punkte an die Fläche koppeln, damit es auf kleinen
+      // Bildschirmen nicht zu voll und auf großen nicht zu leer wirkt
+      const count = Math.min(MAX_PARTICLES, Math.floor(canvasWidth * canvasHeight / 22000));
+
+      particles = [];
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * canvasWidth,
+          y: Math.random() * canvasHeight,
+          vx: (Math.random() - 0.5) * 0.35,   // Geschwindigkeit x (px/Frame)
+          vy: (Math.random() - 0.5) * 0.35,   // Geschwindigkeit y
+          radius: Math.random() * 1.6 + 0.6
+        });
+      }
+    }
+
+    function drawFrame() {
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+
+        // Punkt bewegen, an den Rändern abprallen lassen
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > canvasWidth) p.vx *= -1;
+        if (p.y < 0 || p.y > canvasHeight) p.vy *= -1;
+
+        // Punkt zeichnen
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(56, 189, 248, .5)";
+        ctx.fill();
+
+        // Linien zu allen näheren Punkten ziehen.
+        // Vergleich über das Abstands-Quadrat — spart die teure
+        // Wurzel-Berechnung, das Ergebnis ist dasselbe.
+        for (let j = i + 1; j < particles.length; j++) {
+          const q = particles[j];
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
+          const distSquared = dx * dx + dy * dy;
+
+          if (distSquared < LINK_DISTANCE * LINK_DISTANCE) {
+            // Deckkraft steigt, je näher sich die Punkte sind
+            const opacity = 0.14 * (1 - distSquared / (LINK_DISTANCE * LINK_DISTANCE));
+
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = "rgba(56, 189, 248, " + opacity + ")";
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+
+      animationId = requestAnimationFrame(drawFrame);
+    }
+
+    setupCanvas();
+    drawFrame();
+
+    // Bei Größenänderung des Fensters alles neu aufsetzen
+    window.addEventListener("resize", function () {
+      cancelAnimationFrame(animationId);
+      setupCanvas();
+      drawFrame();
+    });
+
+    // Animation pausieren, wenn der Tab nicht sichtbar ist (spart Akku/CPU)
+    document.addEventListener("visibilitychange", function () {
+      cancelAnimationFrame(animationId);
+      if (!document.hidden) {
+        drawFrame();
+      }
+    });
+  }
+
+
+  /* ------------------------------------------------------------------------
+     8. Jahreszahl im Footer
+     Immer aktuell, muss nie von Hand gepflegt werden.
+     ------------------------------------------------------------------------ */
+
+  const yearElement = document.getElementById("year");
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+
+
+  /* ------------------------------------------------------------------------
+     9. Cookie-Banner
+     Ablauf:
+     - Beim Laden wird geprüft, ob schon eine Entscheidung gespeichert ist
+       (localStorage-Schlüssel "cookieConsent": "accepted" oder "declined").
+     - Wenn nicht, taucht das Banner nach einer Sekunde auf.
+     - "Akzeptieren" speichert die Zustimmung und ruft activateTracking()
+       auf. "Nein danke" speichert die Ablehnung, es wird nichts geladen.
+     - Bei späteren Besuchen mit gespeicherter Zustimmung läuft
+       activateTracking() direkt beim Laden, ohne Banner.
+
+     >>> GOOGLE TAG MANAGER: Der GTM-Code kommt in activateTracking(). <<<
+     So wird er garantiert erst nach der Zustimmung geladen (DSGVO).
+     Zusätzlich wird das Event "cookie_consent_granted" in den dataLayer
+     gepusht. Das kann im GTM direkt als Trigger genutzt werden.
+     ------------------------------------------------------------------------ */
+
+  const CONSENT_KEY = "cookieConsent";
+  const cookieBanner = document.getElementById("cookieBanner");
+  const acceptButton = document.getElementById("cookieAccept");
+  const declineButton = document.getElementById("cookieDecline");
+
+  function getConsent() {
+    try {
+      return localStorage.getItem(CONSENT_KEY);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function saveConsent(value) {
+    try {
+      localStorage.setItem(CONSENT_KEY, value);
+    } catch (e) { /* localStorage blockiert: Banner kommt dann eben wieder */ }
+  }
+
+  function activateTracking() {
+    // Event für den Google Tag Manager bereitstellen
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "cookie_consent_granted" });
+
+    // ================================================================
+    // >>> HIER später das Google-Tag-Manager-Snippet einfügen <<<
+    // (den <script>-Teil aus dem GTM-Container, als JS-Code)
+    // ================================================================
+  }
+
+  if (cookieBanner && acceptButton && declineButton) {
+    function hideBanner() {
+      cookieBanner.classList.remove("show");
+      // erst nach der Ausblend-Animation komplett aus dem Layout nehmen
+      setTimeout(function () {
+        cookieBanner.hidden = true;
+      }, 400);
+    }
+
+    const consent = getConsent();
+
+    if (consent === "accepted") {
+      // Zustimmung liegt schon vor: Tracking direkt aktivieren, kein Banner
+      activateTracking();
+    } else if (consent !== "declined") {
+      // Noch keine Entscheidung: Banner nach kurzer Verzögerung einblenden
+      cookieBanner.hidden = false;
+      setTimeout(function () {
+        cookieBanner.classList.add("show");
+      }, 1000);
+    }
+
+    acceptButton.addEventListener("click", function () {
+      saveConsent("accepted");
+      activateTracking();
+      hideBanner();
+    });
+
+    declineButton.addEventListener("click", function () {
+      saveConsent("declined");
+      hideBanner();
+    });
+  }
+
+
+  /* ------------------------------------------------------------------------
+     Start: gespeicherte Sprachwahl wiederherstellen (Standard: Englisch).
+     Steht hier am Ende, weil setLanguage() den Tipp-Effekt startet und
+     dafür alle Funktionen oben schon definiert sein müssen.
+     Weil beide Seiten denselben localStorage-Schlüssel nutzen, bleibt die
+     Sprache beim Wechsel zwischen Start- und Leistungsseite erhalten.
+     ------------------------------------------------------------------------ */
+
+  let savedLang = "en";
+  try {
+    savedLang = localStorage.getItem("lang") || "en";
+  } catch (e) { /* localStorage nicht verfügbar, Standard bleibt Englisch */ }
+
+  setLanguage(savedLang);
+
+})();

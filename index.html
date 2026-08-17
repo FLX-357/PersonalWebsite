@@ -372,3 +372,65 @@
         <h4 data-i18n="why4.title">I run shops myself</h4>
         <p data-i18n="why4.text">I spend my own money on ads and live from the results. So I won't sell you anything you don't need. If something isn't worth it, I'll tell you straight.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-wrap reveal">
+      <span class="sec-tag" data-i18n="contact.tag">Contact</span>
+      <h2 data-scramble data-i18n="contact.title">Let's build something<br>that sells.</h2>
+      <p data-i18n="contact.text">Curious what that looks like in practice? My services page lists everything I offer. Or just write me — a short message with what you're planning is enough.</p>
+      <!-- Derselbe Kontaktblock steht auch auf der Leistungsseite,
+           nur mit anderen Zielen bei den beiden Buttons. -->
+      <div class="contact-cards">
+        <a class="c-card" href="mailto:FLXUniversal@outlook.com">
+          <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+          <div><span data-i18n="contact.emailLabel">Email</span><b>FLXUniversal@outlook.com</b></div>
+        </a>
+        <div class="c-card">
+          <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <div><span data-i18n="contact.locLabel">Based in</span><b data-i18n="contact.loc">Wedel / Hamburg, Germany</b></div>
+        </div>
+        <div class="c-card">
+          <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+          <div><span data-i18n="contact.timeLabel">Response time</span><b data-i18n="contact.time">Usually within 24 hours</b></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <a href="services.html" class="btn btn-primary"><span data-i18n="contact.btnServices">View my services</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="mailto:FLXUniversal@outlook.com" class="btn btn-ghost" data-i18n="contact.btnMail">Send me an email</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <span class="logo">Flx<span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">.357</span></span>
+    <p>© <span id="year"></span> <span data-i18n="footer.text">FLXUniversal · Felix Bettenworth · Wedel, Germany</span></p>
+    <p class="footer-links"><a href="index.html" data-i18n="footer.l1">About me</a> · <a href="services.html" data-i18n="footer.l2">Services</a> · <a href="mailto:FLXUniversal@outlook.com" data-i18n="footer.l3">Email</a></p>
+  </div>
+</footer>
+
+<!-- Cookie-Banner: taucht nur auf, solange der Besucher noch keine
+     Entscheidung getroffen hat. Die Logik dazu steckt in script.js
+     (dort ist auch die Stelle für den Google Tag Manager markiert). -->
+<div id="cookieBanner" class="cookie-banner" hidden>
+  <div class="cookie-text">
+    <b data-i18n="cookie.title">Quick cookie question</b>
+    <p data-i18n="cookie.text">I use cookies to see how the site is used and to make it better. Okay for you?</p>
+  </div>
+  <div class="cookie-actions">
+    <button id="cookieDecline" class="cookie-btn cookie-btn-ghost" data-i18n="cookie.decline">No thanks</button>
+    <button id="cookieAccept" class="cookie-btn cookie-btn-accept" data-i18n="cookie.accept">Accept</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
