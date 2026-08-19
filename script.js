@@ -514,15 +514,21 @@
      Leerzeichen bleiben immer Leerzeichen, sonst zerfällt die Zeile
      optisch in einen einzigen Block.
 
-     Zwei Vorkehrungen gegen ruckelndes Layout:
+     Drei Vorkehrungen gegen ruckelndes Layout:
      1. Ersetzt wird immer nur innerhalb derselben Zeichenklasse — für ein
         großes A kommt ein anderer Großbuchstabe, für ein kleines a ein
         Kleinbuchstabe, Satzzeichen bleiben stehen. Sonst schwanken die
         Zeilenbreiten so stark, dass die Überschrift mitten in der
         Animation umbricht.
-     2. Während der Animation wird die gemessene Höhe der Überschrift
-        festgehalten. Bricht sie doch einmal anders um, schiebt sich
-        trotzdem nichts darunter weg.
+     2. Für die Dauer der Animation bekommt die Überschrift ihre gemessene
+        Höhe fest zugewiesen, dazu overflow:hidden. Wichtig ist die feste
+        Höhe: min-height allein reicht nicht, das verhindert nur Schrumpfen.
+        Wächst der Text durch einen zusätzlichen Zeilenumbruch, schiebt er
+        sonst die halbe Seite nach unten und wieder zurück — genau das war
+        das Wackeln auf der Leistungsseite.
+     3. Losgelegt wird erst, wenn die Schriften geladen sind. Sonst misst
+        Punkt 2 die Höhe der Ersatzschrift und der Schriftwechsel fällt
+        mitten in die Animation.
      ------------------------------------------------------------------------ */
 
   // Bewusst ohne I, J, M, W, l, 1 und ähnliche Ausreißer: die sind deutlich
@@ -569,7 +575,8 @@
 
   function finishScramble(element, state) {
     element.innerHTML = state.snapshot;       // Originaltext wiederherstellen
-    element.style.minHeight = "";             // Höhensperre wieder lösen
+    element.style.height = "";                // Höhensperre wieder lösen
+    element.style.overflow = "";
     element.classList.remove("is-scrambling");
     runningScrambles.delete(element);
   }
@@ -607,9 +614,11 @@
     const duration = Math.min(320 + totalChars * 16, 1500);
     const startTime = performance.now();
 
-    // Höhe einfrieren, bevor das erste Zeichen getauscht wird. Ohne das
-    // springt bei einem anderen Zeilenumbruch die halbe Seite.
-    element.style.minHeight = element.getBoundingClientRect().height + "px";
+    // Höhe fest einfrieren, bevor das erste Zeichen getauscht wird — und
+    // zwar als height, nicht als min-height. Braucht der verwürfelte Text
+    // eine Zeile mehr, wird die abgeschnitten statt die Seite zu schieben.
+    element.style.height = element.getBoundingClientRect().height + "px";
+    element.style.overflow = "hidden";
 
     const state = { frameId: 0, snapshot: snapshot };
     runningScrambles.set(element, state);
@@ -641,7 +650,7 @@
   // Auslöser: sobald eine Überschrift ins Bild kommt, einmal auflösen.
   // Überschriften, die beim Laden schon sichtbar sind (z. B. im Hero),
   // melden sich sofort — genau das ist gewünscht.
-  if (!reducedMotion && scrambleElements.length) {
+  function startScrambleObserver() {
     const scrambleObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -654,6 +663,18 @@
     scrambleElements.forEach(function (element) {
       scrambleObserver.observe(element);
     });
+  }
+
+  if (!reducedMotion && scrambleElements.length) {
+    // Erst starten, wenn die Schriften da sind. Sonst wird die Höhe der
+    // Ersatzschrift eingefroren und der Schriftwechsel fällt mitten in die
+    // Animation. document.fonts kennt jeder aktuelle Browser — der Zweig
+    // darunter ist nur für den Notfall da.
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(startScrambleObserver).catch(startScrambleObserver);
+    } else {
+      startScrambleObserver();
+    }
   }
 
   // Nach einem Sprachwechsel: alles, was gerade im Bild ist, neu auflösen

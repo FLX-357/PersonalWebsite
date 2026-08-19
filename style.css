@@ -1,13 +1,13 @@
 /* ==========================================================================
-   FLXUniversal — Felix Bettenworth, Portfolio
+   FLXUniversal â€” Felix Bettenworth, Portfolio
    style.css
    --------------------------------------------------------------------------
    Aufbau der Datei:
-   1.  Variablen & Grundgerüst
+   1.  Variablen & GrundgerÃ¼st
    2.  Scroll-Fortschrittsbalken
    3.  Navigation (Desktop: Dock unten / Mobil: Leiste oben)
    4.  Hero (Startbereich)
-   5.  Section-Überschriften (wiederverwendet)
+   5.  Section-Ãœberschriften (wiederverwendet)
    5b. Hintergrund-Glows
    6.  About
    7.  Timeline (Werdegang)
@@ -24,16 +24,16 @@
 
 
 /* --------------------------------------------------------------------------
-   0. Ersatzschriften mit angeglichenen Maßen
+   0. Ersatzschriften mit angeglichenen MaÃŸen
    Die beiden Schriften kommen von Google Fonts und sind erst nach ein paar
-   hundert Millisekunden da. Bis dahin zeigt der Browser eine Systemschrift —
+   hundert Millisekunden da. Bis dahin zeigt der Browser eine Systemschrift â€”
    und wenn die anders breit und hoch ist, springt beim Umschalten die ganze
-   Seite. Genau das war das Ruckeln beim Öffnen der Leistungsseite.
+   Seite. Genau das war das Ruckeln beim Ã–ffnen der Leistungsseite.
 
-   Die Lösung: der Systemschrift per size-adjust und den override-Angaben
-   dieselben Maße verpassen wie der echten Schrift. Dann ist der Wechsel
-   fast nicht mehr zu sehen. Die Werte sind Erfahrungswerte für Arial als
-   Ersatz — Prozentpunkte hin oder her ändern das Ergebnis kaum.
+   Die LÃ¶sung: der Systemschrift per size-adjust und den override-Angaben
+   dieselben MaÃŸe verpassen wie der echten Schrift. Dann ist der Wechsel
+   fast nicht mehr zu sehen. Die Werte sind Erfahrungswerte fÃ¼r Arial als
+   Ersatz â€” Prozentpunkte hin oder her Ã¤ndern das Ergebnis kaum.
    -------------------------------------------------------------------------- */
 
 @font-face {
@@ -56,39 +56,39 @@
 
 
 /* --------------------------------------------------------------------------
-   1. Variablen & Grundgerüst
+   1. Variablen & GrundgerÃ¼st
    Alle Farben und Grundwerte liegen zentral in :root.
-   Wer das Farbschema ändern will, muss nur hier anfassen.
+   Wer das Farbschema Ã¤ndern will, muss nur hier anfassen.
    -------------------------------------------------------------------------- */
 
 :root {
-  /* Hintergründe */
+  /* HintergrÃ¼nde */
   --bg: #060a12;                        /* Seitenhintergrund, fast schwarz */
   --bg-soft: #0b1220;                   /* etwas helleres Dunkelblau */
 
-  /* Kartenflächen und Ränder (halbtransparentes Weiß) */
+  /* KartenflÃ¤chen und RÃ¤nder (halbtransparentes WeiÃŸ) */
   --surface: rgba(255, 255, 255, .04);
   --surface-strong: rgba(255, 255, 255, .07);
   --border: rgba(255, 255, 255, .09);
 
   /* Textfarben */
   --text: #e8eef7;                      /* Haupttext, helles Grau-Blau */
-  --muted: #94a3b8;                     /* Nebentext, gedämpft */
+  --muted: #94a3b8;                     /* Nebentext, gedÃ¤mpft */
 
   /* Akzentfarben */
   --accent: #38bdf8;                    /* Himmelblau */
   --accent-2: #818cf8;                  /* Violett */
-  --accent-3: #2dd4bf;                  /* Türkis */
+  --accent-3: #2dd4bf;                  /* TÃ¼rkis */
   --grad: linear-gradient(120deg, #38bdf8, #818cf8 55%, #2dd4bf);
 
   /* Sonstiges */
   --radius: 18px;                                /* Standard-Eckenrundung */
   /* Die "Ersatz"-Schriften aus Abschnitt 0 stehen als zweite Wahl dahinter */
-  --font-head: "Space Grotesk", "Grotesk Ersatz", sans-serif;   /* Überschriften */
-  --font-body: "Inter", "Inter Ersatz", sans-serif;             /* Fließtext */
+  --font-head: "Space Grotesk", "Grotesk Ersatz", sans-serif;   /* Ãœberschriften */
+  --font-body: "Inter", "Inter Ersatz", sans-serif;             /* FlieÃŸtext */
 }
 
-/* Reset: Browser-Standardabstände entfernen */
+/* Reset: Browser-StandardabstÃ¤nde entfernen */
 * {
   margin: 0;
   padding: 0;
@@ -97,8 +97,8 @@
 
 html {
   scroll-behavior: smooth;      /* sanftes Scrollen bei Anker-Links */
-  scroll-padding-top: 90px;     /* Platz für die fixe Navigation beim Anspringen (mobil) */
-  overflow-x: hidden;           /* doppelt hält besser: nie horizontal scrollen */
+  scroll-padding-top: 90px;     /* Platz fÃ¼r die fixe Navigation beim Anspringen (mobil) */
+  overflow-x: hidden;           /* doppelt hÃ¤lt besser: nie horizontal scrollen */
 }
 
 body {
@@ -144,7 +144,7 @@ section {
 
 /* --------------------------------------------------------------------------
    2. Scroll-Fortschrittsbalken
-   Dünner Balken ganz oben. Die Breite setzt script.js beim Scrollen.
+   DÃ¼nner Balken ganz oben. Die Breite setzt script.js beim Scrollen.
    -------------------------------------------------------------------------- */
 
 #progress {
@@ -163,7 +163,7 @@ section {
    3. Navigation
    Desktop: schwebendes Dock am unteren Bildschirmrand.
    Auf kleineren Bildschirmen (Abschnitt 16) wird die Nav wieder
-   zur klassischen Leiste oben mit Burger-Menü.
+   zur klassischen Leiste oben mit Burger-MenÃ¼.
    -------------------------------------------------------------------------- */
 
 nav {
@@ -187,7 +187,7 @@ nav {
   padding: 10px 10px 10px 24px;
 }
 
-/* Logo "Flx.357" — das ".357" bekommt den Farbverlauf */
+/* Logo "Flx.357" â€” das ".357" bekommt den Farbverlauf */
 .logo {
   font-family: var(--font-head);
   font-weight: 700;
@@ -202,7 +202,7 @@ nav {
   color: transparent;
 }
 
-/* Rechte Seite der Nav: Menü, Sprachbutton, Burger */
+/* Rechte Seite der Nav: MenÃ¼, Sprachbutton, Burger */
 .nav-right {
   display: flex;
   align-items: center;
@@ -217,7 +217,7 @@ nav {
 }
 
 .nav-links li {
-  flex: none;    /* Menüpunkte dürfen im Dock nicht zusammengequetscht werden */
+  flex: none;    /* MenÃ¼punkte dÃ¼rfen im Dock nicht zusammengequetscht werden */
 }
 
 .nav-links a {
@@ -225,11 +225,11 @@ nav {
   color: var(--muted);
   font-weight: 500;
   position: relative;
-  white-space: nowrap;    /* verhindert Umbrüche bei längeren Wörtern ("Über mich") */
+  white-space: nowrap;    /* verhindert UmbrÃ¼che bei lÃ¤ngeren WÃ¶rtern ("Ãœber mich") */
   transition: color .25s;
 }
 
-/* Unterstrich, der bei Hover / aktivem Abschnitt von links reinwächst */
+/* Unterstrich, der bei Hover / aktivem Abschnitt von links reinwÃ¤chst */
 .nav-links a::after {
   content: "";
   position: absolute;
@@ -292,8 +292,8 @@ nav {
   background: rgba(56, 189, 248, .1);
 }
 
-/* Burger-Menü: nur auf kleineren Bildschirmen sichtbar (Abschnitt 16).
-   Die drei <span> sind die Striche — mit .open werden sie zum X gedreht. */
+/* Burger-MenÃ¼: nur auf kleineren Bildschirmen sichtbar (Abschnitt 16).
+   Die drei <span> sind die Striche â€” mit .open werden sie zum X gedreht. */
 #burger {
   display: none;
   background: none;
@@ -317,9 +317,9 @@ nav {
 #burger.open span:nth-child(2) { opacity: 0; }
 #burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Solange das Handy-Menü offen ist, wird die Seite dahinter gesperrt.
-   Ohne das lässt sich der Inhalt hinter dem Overlay horizontal verschieben.
-   script.js setzt die Klasse beim Öffnen und entfernt sie beim Schließen. */
+/* Solange das Handy-MenÃ¼ offen ist, wird die Seite dahinter gesperrt.
+   Ohne das lÃ¤sst sich der Inhalt hinter dem Overlay horizontal verschieben.
+   script.js setzt die Klasse beim Ã–ffnen und entfernt sie beim SchlieÃŸen. */
 body.menu-open {
   overflow: hidden;
 }
@@ -339,7 +339,7 @@ body.menu-open {
   overflow: hidden;
 }
 
-/* Zeichenfläche für das Partikel-Netzwerk (füllt den ganzen Hero) */
+/* ZeichenflÃ¤che fÃ¼r das Partikel-Netzwerk (fÃ¼llt den ganzen Hero) */
 #particles {
   position: absolute;
   inset: 0;
@@ -379,8 +379,8 @@ body.menu-open {
   50%      { transform: translateY(40px) scale(1.06); }
 }
 
-/* Dezentes Gitternetz — reines CSS aus zwei Verlaufslinien.
-   Die mask-image blendet es zu den Rändern hin aus. */
+/* Dezentes Gitternetz â€” reines CSS aus zwei Verlaufslinien.
+   Die mask-image blendet es zu den RÃ¤ndern hin aus. */
 .hero-grid {
   position: absolute;
   inset: 0;
@@ -398,7 +398,7 @@ body.menu-open {
   max-width: 820px;
 }
 
-/* Kleines "Available"-Badge mit pulsierendem grünem Punkt */
+/* Kleines "Available"-Badge mit pulsierendem grÃ¼nem Punkt */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -426,7 +426,7 @@ body.menu-open {
   100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
 }
 
-/* Große Überschrift — clamp() skaliert die Schrift mit der Fensterbreite */
+/* GroÃŸe Ãœberschrift â€” clamp() skaliert die Schrift mit der Fensterbreite */
 #hero h1 {
   font-size: clamp(2.6rem, 6.5vw, 4.6rem);
   font-weight: 700;
@@ -519,8 +519,8 @@ body.menu-open {
   border-color: var(--accent);
 }
 
-/* Werkzeug-Zeile unter den Buttons: schlichte Chips statt großer Zahlen.
-   Die .chip-Optik kommt aus Abschnitt 7 (wird überall wiederverwendet). */
+/* Werkzeug-Zeile unter den Buttons: schlichte Chips statt groÃŸer Zahlen.
+   Die .chip-Optik kommt aus Abschnitt 7 (wird Ã¼berall wiederverwendet). */
 .hero-tools {
   max-width: 680px;
 }
@@ -541,7 +541,7 @@ body.menu-open {
 
 
 /* --------------------------------------------------------------------------
-   5. Section-Überschriften
+   5. Section-Ãœberschriften
    Jede Section nutzt dasselbe Muster: kleines Label, Titel, Einleitung.
    -------------------------------------------------------------------------- */
 
@@ -589,7 +589,7 @@ body.menu-open {
   animation: float 18s ease-in-out infinite;   /* @keyframes float aus dem Hero */
 }
 
-/* Inhalte über die Glows heben */
+/* Inhalte Ã¼ber die Glows heben */
 section > .container {
   position: relative;
   z-index: 1;
@@ -600,7 +600,7 @@ section > .container {
    sichtbar bleibt nur ein weicher Farbschimmer am Rand. */
 #timeline .glow { top: 80px;    right: -200px; background: #4338ca; }                       /* Indigo  */
 #skills .glow   { bottom: 40px; left: -220px;  background: #0e7490; animation-delay: -6s; } /* Petrol  */
-#insights .glow { top: 60px;    right: -220px; background: #0f766e; animation-delay: -3s; } /* Türkis  */
+#insights .glow { top: 60px;    right: -220px; background: #0f766e; animation-delay: -3s; } /* TÃ¼rkis  */
 #why .glow      { bottom: 60px; left: -200px;  background: #4338ca; animation-delay: -9s; } /* Indigo  */
 
 
@@ -723,7 +723,7 @@ section > .container {
   padding-bottom: 0;
 }
 
-/* Punkt auf der Linie (Ring, der Kern kommt über ::after) */
+/* Punkt auf der Linie (Ring, der Kern kommt Ã¼ber ::after) */
 .t-dot {
   position: absolute;
   left: 8px;
@@ -754,7 +754,7 @@ section > .container {
   transition: transform .3s, border-color .3s, background .3s;
 }
 
-/* Karte rückt bei Hover leicht nach rechts */
+/* Karte rÃ¼ckt bei Hover leicht nach rechts */
 .t-card:hover {
   transform: translateX(6px);
   border-color: rgba(56, 189, 248, .4);
@@ -779,7 +779,7 @@ section > .container {
   font-size: .98rem;
 }
 
-/* Kleine Schlagwort-Chips (werden überall wiederverwendet) */
+/* Kleine Schlagwort-Chips (werden Ã¼berall wiederverwendet) */
 .t-tags {
   display: flex;
   flex-wrap: wrap;
@@ -801,7 +801,7 @@ section > .container {
 /* --------------------------------------------------------------------------
    8. Insights (Bachelorarbeit) & Why me
    Insights: drei kompakte Karten (Frage, Relevanz, Fazit).
-   Why me: dieselben Karten im 2x2-Raster, mit großer Nummer.
+   Why me: dieselben Karten im 2x2-Raster, mit groÃŸer Nummer.
    -------------------------------------------------------------------------- */
 
 .insight-grid {
@@ -835,7 +835,7 @@ section > .container {
 }
 
 /* "Warum ich"-Bereich: nutzt die Insight-Karten im 2x2-Raster,
-   jede Karte bekommt eine große Nummer mit Farbverlauf */
+   jede Karte bekommt eine groÃŸe Nummer mit Farbverlauf */
 .why-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -879,7 +879,7 @@ section > .container {
   transition: transform .3s, border-color .3s;
 }
 
-/* Lichtschein-Overlay (unsichtbar, bis die Maus über der Karte ist) */
+/* Lichtschein-Overlay (unsichtbar, bis die Maus Ã¼ber der Karte ist) */
 .skill-card::after {
   content: "";
   position: absolute;
@@ -927,7 +927,7 @@ section > .container {
 }
 
 /* Chips statt Prozent-Balken: ehrlicher und ruhiger.
-   Die Chips sind hier etwas größer als sonst, damit die Karten gefüllt wirken. */
+   Die Chips sind hier etwas grÃ¶ÃŸer als sonst, damit die Karten gefÃ¼llt wirken. */
 .skill-chips {
   display: flex;
   flex-wrap: wrap;
@@ -943,7 +943,7 @@ section > .container {
 /* --------------------------------------------------------------------------
    10. Work (Projekte & Services)
    Sechs Karten im 3er-Raster. Bei Hover hebt sich die Karte an
-   und oben wächst eine Farblinie von links rein (::before).
+   und oben wÃ¤chst eine Farblinie von links rein (::before).
    -------------------------------------------------------------------------- */
 
 #work {
@@ -1012,7 +1012,7 @@ section > .container {
 .work-card p {
   color: var(--muted);
   font-size: .93rem;
-  flex: 1;    /* drückt die Chips ans untere Kartenende */
+  flex: 1;    /* drÃ¼ckt die Chips ans untere Kartenende */
 }
 
 .work-card .t-tags {
@@ -1055,11 +1055,11 @@ section > .container {
 
 /* --------------------------------------------------------------------------
    12. Kontakt
-   Eine große Karte mit den Kontaktdaten und zwei Buttons darunter.
+   Eine groÃŸe Karte mit den Kontaktdaten und zwei Buttons darunter.
    Identisch auf Startseite und Leistungsseite.
 
-   Die Abstände regelt der Block selbst über flex + gap. Früher hingen sie
-   an margin-bottom der einzelnen Teile — das ist beim zweiseitigen Umbau
+   Die AbstÃ¤nde regelt der Block selbst Ã¼ber flex + gap. FrÃ¼her hingen sie
+   an margin-bottom der einzelnen Teile â€” das ist beim zweiseitigen Umbau
    auseinandergelaufen und die Buttons klebten an den Karten.
    -------------------------------------------------------------------------- */
 
@@ -1074,16 +1074,16 @@ section > .container {
   position: relative;
   overflow: hidden;
 
-  /* Alle Kinder untereinander, Abstände zentral über gap.
-     So kann sich nichts mehr überlappen, egal was dazukommt. */
+  /* Alle Kinder untereinander, AbstÃ¤nde zentral Ã¼ber gap.
+     So kann sich nichts mehr Ã¼berlappen, egal was dazukommt. */
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 22px;
 }
 
-/* Innerhalb des Blocks regelt gap die Abstände — die Eigenabstände der
-   wiederverwendeten Bausteine würden sich sonst dazuaddieren. */
+/* Innerhalb des Blocks regelt gap die AbstÃ¤nde â€” die EigenabstÃ¤nde der
+   wiederverwendeten Bausteine wÃ¼rden sich sonst dazuaddieren. */
 .contact-wrap .sec-tag {
   margin-bottom: 0;
 }
@@ -1100,7 +1100,7 @@ section > .container {
 }
 
 /* Etwas mehr Luft vor den Karten und vor den Buttons als zwischen
-   Überschrift und Text — das gliedert den Block in drei Stufen. */
+   Ãœberschrift und Text â€” das gliedert den Block in drei Stufen. */
 .contact-cards {
   display: flex;
   justify-content: center;
@@ -1176,17 +1176,17 @@ footer .logo {
 
 /* --------------------------------------------------------------------------
    13b. Cookie-Banner
-   Liegt fix ÜBER dem Nav-Dock (bottom: 100px), damit es dessen Klicks
-   nicht blockiert. Startet unsichtbar und ohne Klickfläche
+   Liegt fix ÃœBER dem Nav-Dock (bottom: 100px), damit es dessen Klicks
+   nicht blockiert. Startet unsichtbar und ohne KlickflÃ¤che
    (pointer-events: none); script.js entfernt das hidden-Attribut und
-   hängt .show an, dann gleitet das Banner sanft ins Bild und wird klickbar.
+   hÃ¤ngt .show an, dann gleitet das Banner sanft ins Bild und wird klickbar.
    -------------------------------------------------------------------------- */
 
 .cookie-banner {
   position: fixed;
   left: 24px;
   right: 24px;
-  bottom: 100px;          /* über dem Nav-Dock, damit es keine Klicks blockiert */
+  bottom: 100px;          /* Ã¼ber dem Nav-Dock, damit es keine Klicks blockiert */
   pointer-events: none;   /* solange unsichtbar: Klicks gehen durch */
   max-width: 620px;
   margin: 0 auto;
@@ -1244,7 +1244,7 @@ footer .logo {
   transform: translateY(-2px);
 }
 
-/* "Akzeptieren": auffällig mit Farbverlauf */
+/* "Akzeptieren": auffÃ¤llig mit Farbverlauf */
 .cookie-btn-accept {
   border: none;
   background: var(--grad);
@@ -1267,7 +1267,7 @@ footer .logo {
 /* --------------------------------------------------------------------------
    14. Scroll-Animationen (Reveal)
    Alles mit der Klasse .reveal startet unsichtbar und leicht nach unten
-   verschoben. script.js hängt .visible an, sobald das Element ins
+   verschoben. script.js hÃ¤ngt .visible an, sobald das Element ins
    Sichtfeld scrollt -> es blendet sanft ein.
    data-delay="1" bis "3" staffelt benachbarte Elemente zeitlich.
    -------------------------------------------------------------------------- */
@@ -1321,8 +1321,8 @@ footer .logo {
    -------------------------------------------------------------------------- */
 
 /* Tablet & Handy: Raster reduzieren, Nav wieder als Leiste oben.
-   Das Dock vom Desktop hätte hier nicht genug Platz, deshalb gibt es
-   ab 920px abwärts die klassische Top-Bar mit Burger-Menü. */
+   Das Dock vom Desktop hÃ¤tte hier nicht genug Platz, deshalb gibt es
+   ab 920px abwÃ¤rts die klassische Top-Bar mit Burger-MenÃ¼. */
 @media (max-width: 920px) {
   .about-grid,
   .skills-grid,
@@ -1343,7 +1343,7 @@ footer .logo {
     padding: 80px 0;
   }
 
-  /* Nav: vom Dock zurück zur Leiste am oberen Rand */
+  /* Nav: vom Dock zurÃ¼ck zur Leiste am oberen Rand */
   nav {
     top: 0;
     bottom: auto;
@@ -1381,7 +1381,7 @@ footer .logo {
     display: block;
   }
 
-  /* Menü wird zum Vollbild-Overlay, das von rechts reinfährt */
+  /* MenÃ¼ wird zum Vollbild-Overlay, das von rechts reinfÃ¤hrt */
   .nav-links {
     position: fixed;
     inset: 0;
@@ -1425,7 +1425,7 @@ footer .logo {
   }
 
   /* Glows auf dem Handy kleiner und noch dezenter,
-     sonst füllen sie den halben Bildschirm */
+     sonst fÃ¼llen sie den halben Bildschirm */
   .glow {
     width: 340px;
     height: 340px;
@@ -1450,28 +1450,28 @@ footer .logo {
 
 
 /* ==========================================================================
-   17. ERWEITERUNGEN — Serviceseite, Scramble-Effekt, Formular
+   17. ERWEITERUNGEN â€” Serviceseite, Scramble-Effekt, Formular
    --------------------------------------------------------------------------
    Alles ab hier ist beim Umbau auf zwei Seiten dazugekommen:
-   17a. Scramble-Effekt (Schrift "verwürfelt" sich beim Reinscrollen)
+   17a. Scramble-Effekt (Schrift "verwÃ¼rfelt" sich beim Reinscrollen)
    17b. Navigation: Services-Link hervorheben
-   17c. Ergänzungen auf der Startseite (Timeline, Skills, Highlights, Footer)
+   17c. ErgÃ¤nzungen auf der Startseite (Timeline, Skills, Highlights, Footer)
    17d. Serviceseite: Hero, Service-Karten, Ablauf, Preise
-   17e. Responsive für alles Neue
+   17e. Responsive fÃ¼r alles Neue
    ========================================================================== */
 
 
 /* --------------------------------------------------------------------------
    17a. Scramble-Effekt
-   Überschriften mit dem Attribut data-scramble starten als zufälliges
-   Zeichenwirrwarr und lösen sich beim Reinscrollen von links nach rechts
+   Ãœberschriften mit dem Attribut data-scramble starten als zufÃ¤lliges
+   Zeichenwirrwarr und lÃ¶sen sich beim Reinscrollen von links nach rechts
    in den echten Text auf. Die Animation selbst steckt in script.js,
    hier steht nur, wie der "unfertige" Zustand aussehen soll.
    -------------------------------------------------------------------------- */
 
-/* Solange gewürfelt wird: monospace-artige Optik in Akzentfarbe.
+/* Solange gewÃ¼rfelt wird: monospace-artige Optik in Akzentfarbe.
    font-variant-numeric + font-feature-settings halten die Zeichenbreiten
-   ruhig, damit die Zeile beim Auflösen nicht zappelt. */
+   ruhig, damit die Zeile beim AuflÃ¶sen nicht zappelt. */
 [data-scramble].is-scrambling {
   color: var(--accent);
   opacity: .8;
@@ -1479,7 +1479,7 @@ footer .logo {
   font-variant-numeric: tabular-nums;
 }
 
-/* Der Farbverlauf im Hero würde während des Würfelns stören —
+/* Der Farbverlauf im Hero wÃ¼rde wÃ¤hrend des WÃ¼rfelns stÃ¶ren â€”
    deshalb bekommt der Verlaufs-Teil in dieser Phase eine Vollfarbe. */
 [data-scramble].is-scrambling .grad {
   background: none;
@@ -1510,17 +1510,17 @@ footer .logo {
 
 
 /* --------------------------------------------------------------------------
-   17c. Ergänzungen auf der Startseite
+   17c. ErgÃ¤nzungen auf der Startseite
    -------------------------------------------------------------------------- */
 
-/* Überschrift innerhalb einer Timeline-Karte (neu, über dem Text) */
+/* Ãœberschrift innerhalb einer Timeline-Karte (neu, Ã¼ber dem Text) */
 .t-card h4 {
   font-family: var(--font-head);
   font-size: 1.05rem;
   margin: 6px 0 8px;
 }
 
-/* Kurze Erklärzeile in den Skill-Karten, zwischen Titel und Chips */
+/* Kurze ErklÃ¤rzeile in den Skill-Karten, zwischen Titel und Chips */
 .skill-note {
   color: var(--muted);
   font-size: .9rem;
@@ -1560,25 +1560,30 @@ footer .logo {
    17d. Serviceseite
    -------------------------------------------------------------------------- */
 
-/* Der Hero der Serviceseite braucht keine volle Bildschirmhöhe,
+/* Der Hero der Serviceseite braucht keine volle BildschirmhÃ¶he,
    weil direkt darunter die Leistungen kommen sollen.
 
-   Aber: eine feste Mindesthöhe braucht er trotzdem. Ohne die richtet sich
-   seine Höhe nach dem Text — und sobald die Schrift nachgeladen ist,
-   ändert sich die und schiebt die ganze Seite nach unten. Bewusst in Pixeln
+   Aber: eine feste MindesthÃ¶he braucht er trotzdem. Ohne die richtet sich
+   seine HÃ¶he nach dem Text â€” und sobald die Schrift nachgeladen ist,
+   Ã¤ndert sich die und schiebt die ganze Seite nach unten. Bewusst in Pixeln
    statt in vh, weil sich vh auf dem Handy beim Ein- und Ausblenden der
-   Adressleiste ändert und dann beim Scrollen dasselbe Springen erzeugt. */
+   Adressleiste Ã¤ndert und dann beim Scrollen dasselbe Springen erzeugt. */
 #hero.hero-compact {
   min-height: 660px;
   padding: 140px 0 84px;
 }
 
+/* Etwas kleiner als auf der Startseite. Grund ist nicht nur die Optik:
+   die deutsche Fassung ("dein Business tun kann.") fÃ¼llte bei 3.9rem
+   Ã¼ber 90 Prozent der Zeile. Beim VerwÃ¼rfeln reichten dann ein paar
+   breitere Buchstaben fÃ¼r einen zusÃ¤tzlichen Zeilenumbruch. Bei 3.4rem
+   bleibt genug Reserve, dass das gar nicht erst passieren kann. */
 #hero.hero-compact h1 {
-  font-size: clamp(2.3rem, 5.6vw, 3.9rem);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
 }
 
-/* Die Leistungen liegen untereinander als breite Karten —
-   dadurch ist Platz für die Detail-Listen. */
+/* Die Leistungen liegen untereinander als breite Karten â€”
+   dadurch ist Platz fÃ¼r die Detail-Listen. */
 .service-list {
   display: flex;
   flex-direction: column;
@@ -1595,7 +1600,7 @@ footer .logo {
   transition: border-color .35s, box-shadow .35s, transform .35s;
 }
 
-/* Farblinie links, die bei Hover von oben nach unten durchläuft */
+/* Farblinie links, die bei Hover von oben nach unten durchlÃ¤uft */
 .service-card::before {
   content: "";
   position: absolute;
@@ -1660,7 +1665,7 @@ footer .logo {
   max-width: 720px;
 }
 
-/* Die Detailpunkte: zwei Spalten, jeder Punkt mit eigenem Häkchen.
+/* Die Detailpunkte: zwei Spalten, jeder Punkt mit eigenem HÃ¤kchen.
    list-style ist aus, das Zeichen kommt aus ::before. */
 .service-points {
   list-style: none;
@@ -1696,7 +1701,7 @@ footer .logo {
 }
 
 
-/* Ablauf: fünf Karten mit großer Nummer im Hintergrund */
+/* Ablauf: fÃ¼nf Karten mit groÃŸer Nummer im Hintergrund */
 .process-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1745,7 +1750,7 @@ footer .logo {
 }
 
 
-/* Preise: eine große Karte mit zwei Spalten */
+/* Preise: eine groÃŸe Karte mit zwei Spalten */
 .pricing-wrap {
   border: 1px solid var(--border);
   border-radius: 26px;
@@ -1787,7 +1792,7 @@ footer .logo {
   font-size: .93rem;
 }
 
-/* Häkchen vor jedem Punkt, gezeichnet als gedrehtes L aus zwei Rändern */
+/* HÃ¤kchen vor jedem Punkt, gezeichnet als gedrehtes L aus zwei RÃ¤ndern */
 .pricing-item li::before {
   content: "";
   position: absolute;
@@ -1802,7 +1807,7 @@ footer .logo {
 
 
 /* --------------------------------------------------------------------------
-   17e. Responsive für die neuen Bereiche
+   17e. Responsive fÃ¼r die neuen Bereiche
    -------------------------------------------------------------------------- */
 
 @media (max-width: 920px) {
@@ -1810,7 +1815,7 @@ footer .logo {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  /* Weniger Innenabstand, damit die drei Kontaktkarten länger
+  /* Weniger Innenabstand, damit die drei Kontaktkarten lÃ¤nger
      nebeneinander passen, bevor sie umbrechen */
   .contact-wrap {
     padding: 60px 32px;
@@ -1846,7 +1851,7 @@ footer .logo {
   }
 
   /* Kopfzeile der Service-Karte umbrechen: Nummer und Icon oben,
-     Titel darunter — sonst wird es auf dem Handy zu eng. */
+     Titel darunter â€” sonst wird es auf dem Handy zu eng. */
   .service-head {
     grid-template-columns: auto auto;
     gap: 14px;
